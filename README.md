@@ -1,4 +1,55 @@
-# fore-head-analytics
+# __4Head Analytics__ 
+
+![4Head](https://i.imgur.com/ggFRSPJ.jpg)
+
+As a Twitch.tv user, I follow a lot of broadcasters that seem likeable, at least on the surface level. How many times do I open the broadcasts of certain streamers only to immediately tab out, or even close the stream after a few seconds altogether? In an effort to remove things from my life that do not spark joy, I am creating __4Head Analytics__. This application is built with the intent of tracking user engagement data with their various followed streams and displaying engagement data that might not be obvious to the user, like patterns of active stream watching, chat engagement, "bored opens," (quantified by opening the stream and closing it immediately or tabbing out, as mentioned previously,) and the like.
+
+I'd also like to develop it into being a more verbose personalized Twitch dashboard as the original's dashboard doesn't lend itself to seeing only personally curated content. The front page of Twitch tries to show you every stream under the sun by viewer count and shoves your followed streams over to the side, and doesn't really allow you to sort your followed streams by any sort of metric. Given how the Twitch embedding service works this may be complex.
+
+# Planning Tool
+
+It's a Trello board linked [here](https://trello.com/b/pKCek74P/4head-analytics).
+## User stories, wireframes, and ERDs are contained therein.
+
+# Technologies
+
+## __Front End__
+
+### 1. ReasonML
+
+> ReasonML is a functional language derived from Ocaml with a strong typing system, powerful pattern-matching capabilities, and seamless interopability with vanilla JavaScript.
+
+### 2. ReasonReact
+
+>A React-like framework that will allow me to write code in ReasonML.
+
+### 3. Twitch API V5 && New Twitch API
+
+> Yes, the version name is literally "New Twitch API." An absolute monstrosity. Will allow for user authentication, embedding of the Twitch client itself, and collection of various broadcaster and viewer data.
+
+### 4. Chrome extension
+
+>Actually handling user engagement analysis might be a bit of a pain in the ass. So far, my plan is to measure time in focus, time spent in chat, and sub-minute open times. (The actual demonstration will probably involve a smidgen of hardcoding.) Will need a chrome extension to deal with it. Probably.
+
+## __Back End__
+
+### 1. Express.js
+
+> Standard server-side library.
+
+### 2. Knex.js
+
+>Standard query-writing library.
+
+### 3. PostgreSQL
+
+>Standard database software.
+
+# Server Routing
+
+Pending. Will largely depend on the intricacies of the Twitch API so subject to change.
+
+Users, Relations (user to streamer), various subqueries, etc.# fore-head-analytics
 
 ## Run Project
 
