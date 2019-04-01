@@ -2,9 +2,7 @@
 
 ![4Head](https://i.imgur.com/ggFRSPJ.jpg)
 
-As a Twitch.tv user, I follow a lot of broadcasters that seem likeable, at least on the surface level. How many times do I open the broadcasts of certain streamers only to immediately tab out, or even close the stream after a few seconds altogether? In an effort to remove things from my life that do not spark joy, I am creating __4Head Analytics__. This application is built with the intent of tracking user engagement data with their various followed streams and displaying engagement data that might not be obvious to the user, like patterns of active stream watching, chat engagement, "bored opens," (quantified by opening the stream and closing it immediately or tabbing out, as mentioned previously,) and the like.
-
-I'd also like to develop it into being a more verbose personalized Twitch dashboard as the original's dashboard doesn't lend itself to seeing only personally curated content. The front page of Twitch tries to show you every stream under the sun by viewer count and shoves your followed streams over to the side, and doesn't really allow you to sort your followed streams by any sort of metric. Given how the Twitch embedding service works this may be complex.
+As a Twitch.tv user, I follow a lot of broadcasters that seem likeable, at least on the surface level. How many times do I open the broadcasts of certain streamers only to immediately tab out, or even close the stream after a few seconds altogether? In an effort to remove things from my life that do not spark joy, I am creating __4Head Analytics__. This application is built with the intent of tracking user engagement data with their various followed streams and displaying engagement data that might not be obvious to the user.
 
 # Planning Tool
 
