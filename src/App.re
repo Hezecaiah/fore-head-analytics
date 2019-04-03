@@ -3,6 +3,10 @@ type route =
 	| Thing
 	| Thing2;
 
+type state = {
+	route: route
+}
+
 type action = 
 	| ChangeRoute(route);
 
@@ -16,34 +20,23 @@ let mapUrlToRoute = (url: ReasonReact.Router.url) =>
   | _ => Home
   };
 
-let make = (~greeting, _children) => {
+let make = (_children) => {
   ...component,
 
   initialState: () => {route: Home},
 	
 	reducer: (action, state) =>
 		switch (action) {
-		/* router actions */
-		| ShowAll => ReasonReact.Update({...state, nowShowing: AllTodos})
-		| ShowActive => ReasonReact.NoUpdate
-		| ChangeTodo(text) => ReasonReact.NoUpdate
-		| ShowShared => ReasonReact.NoUpdate
+		| ChangeRoute(route) => ReasonReact.NoUpdate
 		},
 		
-	didMount: self => {
+	/* didMount: self => {
 		let watcherID = ReasonReact.Router.watchUrl(url => {
-			switch (url.hash, MyAppStatus.isUserLoggedIn) {
-			| ("active", _) => self.send(ShowActive)
-			| ("completed", _) => self.send(ShowCompleted)
-			| ("shared", true) => self.send(ShowShared)
-			| ("shared", false) when isSpecialUser => /* handle this state please */
-			| ("shared", false) => self.send(ShowActive)/* handle this state please */
-			| _ => self.send(ShowAll)
+			switch (url.path) {
+			| (["home"]) => Home
 			}
 		});
-	}
-	
-	self.onUnmount(() => ReasonReact.Router.unwatchUrl(watcherID));
+	}, */
 
   render: self => {
     <div>

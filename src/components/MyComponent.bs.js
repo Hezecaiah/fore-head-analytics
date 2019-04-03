@@ -22,7 +22,7 @@ function make(_children) {
           /* render */(function (self) {
               return React.createElement("div", undefined, React.createElement("h1", undefined, "Name Jeeef."), React.createElement("button", {
                               onClick: (function (_event) {
-                                  return Curry._1(self[/* send */3], /* Something */0);
+                                  return Curry._1(self[/* send */3], /* Something */1);
                                 })
                             }, "Modify stuff"));
             }),
@@ -31,10 +31,17 @@ function make(_children) {
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
-              if (action) {
-                return /* NoUpdate */0;
-              } else {
-                return /* Update */Block.__(0, [/* record */[/* dummy */false]]);
+              switch (action) {
+                case 0 : 
+                    return /* Update */Block.__(0, [/* record */[/* dummy */!state[/* dummy */0]]]);
+                case 1 : 
+                    return /* SideEffects */Block.__(1, [(function (_self) {
+                                  console.log("Lol");
+                                  return /* () */0;
+                                })]);
+                case 2 : 
+                    return /* NoUpdate */0;
+                
               }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]

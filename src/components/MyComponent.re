@@ -5,6 +5,7 @@ type state = {
 
 /* Action declaration */
 type action =
+	| State
   | Something
 	| Nothing;
 
@@ -21,8 +22,9 @@ let make = (_children) => {
 	initialState: () => { dummy:true },
 
   /* State transitions */
-  reducer: (action, _state) =>
+  reducer: (action, state) =>
     switch (action) {
+		| State => ReasonReact.Update({dummy: !state.dummy})
     | Something => ReasonReact.SideEffects(_self => Js.log(ReasonReact.string("Lol")))
     | Nothing => ReasonReact.NoUpdate
 		},
