@@ -5,6 +5,7 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var Dashboard$ReactTemplate = require("./components/Dashboard.bs.js");
 
 function toPage(url) {
   var match = url[/* path */0];
@@ -57,7 +58,16 @@ function make(_children) {
           /* reactClassInternal */component[/* reactClassInternal */1],
           /* handedOffState */component[/* handedOffState */2],
           /* willReceiveProps */component[/* willReceiveProps */3],
-          /* didMount */component[/* didMount */4],
+          /* didMount */(function (self) {
+              var watcherID = function (param) {
+                return ReasonReact.Router[/* watchUrl */2]((function (url) {
+                              return Curry._1(self[/* send */3], /* ChangeRoute */[toPage(url)]);
+                            }));
+              };
+              return Curry._1(self[/* onUnmount */4], (function (param) {
+                            return ReasonReact.Router[/* unwatchUrl */3](watcherID(/* () */0));
+                          }));
+            }),
           /* didUpdate */component[/* didUpdate */5],
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
@@ -70,7 +80,7 @@ function make(_children) {
                     tmp = React.createElement("h1", undefined, "Log In");
                     break;
                 case 1 : 
-                    tmp = React.createElement("h1", undefined, "Dashboard");
+                    tmp = ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
                     tmp = React.createElement("h1", undefined, "Lol it's a page");
@@ -79,24 +89,15 @@ function make(_children) {
               }
               return React.createElement("div", undefined, React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[
-                                                      /* LogIn */0,
-                                                      "login"
-                                                    ]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* LogIn */0]);
                                         })
                                     }, "Log In")), React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[
-                                                      /* Dashboard */1,
-                                                      "dashboard"
-                                                    ]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* Dashboard */1]);
                                         })
                                     }, "Dashboard")), React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[
-                                                      /* Page */2,
-                                                      "page"
-                                                    ]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* Page */2]);
                                         })
                                     }, "Thing 1"))), tmp);
             }),
@@ -105,8 +106,9 @@ function make(_children) {
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, _state) {
-              ReasonReact.Router[/* replace */1](action[1]);
-              return /* Update */Block.__(0, [/* record */[/* route */action[0]]]);
+              var route = action[0];
+              ReasonReact.Router[/* replace */1](toUrl(route));
+              return /* Update */Block.__(0, [/* record */[/* route */route]]);
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
         ];

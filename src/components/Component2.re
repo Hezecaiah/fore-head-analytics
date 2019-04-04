@@ -19,7 +19,7 @@ let make = (~greeting, _children) => {
   /* spread the other default fields of component here and override a few */
   ...component,
 
-  initialState: () => {count: 0, show: true},
+  initialState: () => { count: 0, show: true },
 
   /* State transitions */
   reducer: (action, state) =>
