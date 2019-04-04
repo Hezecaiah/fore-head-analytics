@@ -29,6 +29,7 @@ let make = (_children) => {
     <div>
 			<h1>{ReasonReact.string("Here's the dashboard lol")}</h1>
 			<p>{ReasonReact.string("Omegalul")}</p>
+      <div id="twitch-embed"></div>
 
 
     </div>;
