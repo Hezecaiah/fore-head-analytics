@@ -17,10 +17,8 @@ function make(_children) {
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
-          /* render */(function (self) {
-              return React.createElement("div", undefined, React.createElement("h1", undefined, "Here's the dashboard lol"), React.createElement("p", undefined, "Omegalul"), React.createElement("div", {
-                              id: "twitch-embed"
-                            }));
+          /* render */(function (_self) {
+              return React.createElement("div", undefined, React.createElement("h1", undefined, "Here's the dashboard lol"), React.createElement("p", undefined, "Omegalul"));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

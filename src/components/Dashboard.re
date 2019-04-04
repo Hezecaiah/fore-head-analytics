@@ -25,13 +25,20 @@ let make = (_children) => {
 
     }, */
 
-  render: self => {
+  /* didMount: _self => {
+    [%bs.raw {|
+      new Twitch.Embed("twitch-embed", {
+        width: 854,
+        height: 480,
+        channel: "monstercat"
+      });
+    |}]
+  }, */
+
+  render: _self => {
     <div>
 			<h1>{ReasonReact.string("Here's the dashboard lol")}</h1>
 			<p>{ReasonReact.string("Omegalul")}</p>
-      <div id="twitch-embed"></div>
-
-
     </div>;
   },
 };
