@@ -13,7 +13,7 @@ type action =
    Needs to be **after** state and action declarations! */
 let component = ReasonReact.reducerComponent("Test");
 
-/* greeting and children are props. `children` isn't used, therefore ignored.
+/* Props. `children` isn't used, therefore ignored.
    We ignore it by prepending it with an underscore */
 let make = (_children) => {
   /* spread the other default fields of component here and override a few */

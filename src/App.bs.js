@@ -6,6 +6,49 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
+function toPage(url) {
+  var match = url[/* path */0];
+  if (match) {
+    switch (match[0]) {
+      case "dashboard" : 
+          return /* Dashboard */1;
+      case "login" : 
+          if (match[1]) {
+            return /* Dashboard */1;
+          } else {
+            return /* LogIn */0;
+          }
+      case "page" : 
+          if (match[1]) {
+            return /* Dashboard */1;
+          } else {
+            return /* Page */2;
+          }
+      default:
+        return /* Dashboard */1;
+    }
+  } else {
+    return /* Dashboard */1;
+  }
+}
+
+function toUrl(page) {
+  switch (page) {
+    case 0 : 
+        return "login";
+    case 1 : 
+        return "dashboard";
+    case 2 : 
+        return "page";
+    
+  }
+}
+
+var Mapper = /* module */[
+  /* toPage */toPage,
+  /* toUrl */toUrl
+];
+
 var component = ReasonReact.reducerComponent("App");
 
 function make(_children) {
@@ -24,41 +67,52 @@ function make(_children) {
               var tmp;
               switch (match) {
                 case 0 : 
-                    tmp = React.createElement("h1", undefined, "Home");
+                    tmp = React.createElement("h1", undefined, "Log In");
                     break;
                 case 1 : 
-                    tmp = React.createElement("h1", undefined, "Thing 1");
+                    tmp = React.createElement("h1", undefined, "Dashboard");
                     break;
                 case 2 : 
-                    tmp = React.createElement("h1", undefined, "Thing 2");
+                    tmp = React.createElement("h1", undefined, "Lol it's a page");
                     break;
                 
               }
               return React.createElement("div", undefined, React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* Home */0]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */[
+                                                      /* LogIn */0,
+                                                      "login"
+                                                    ]);
                                         })
-                                    }, "Home")), React.createElement("li", undefined, React.createElement("button", {
+                                    }, "Log In")), React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* Thing */1]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */[
+                                                      /* Dashboard */1,
+                                                      "dashboard"
+                                                    ]);
                                         })
-                                    }, "Thing")), React.createElement("li", undefined, React.createElement("button", {
+                                    }, "Dashboard")), React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* Thing2 */2]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */[
+                                                      /* Page */2,
+                                                      "page"
+                                                    ]);
                                         })
-                                    }, "Thing 2"))), tmp);
+                                    }, "Thing 1"))), tmp);
             }),
           /* initialState */(function (param) {
-              return /* record */[/* route : Home */0];
+              return /* record */[/* route */toPage(ReasonReact.Router[/* dangerouslyGetInitialUrl */4](/* () */0))];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, _state) {
+              ReasonReact.Router[/* replace */1](action[1]);
               return /* Update */Block.__(0, [/* record */[/* route */action[0]]]);
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
         ];
 }
 
+exports.Mapper = Mapper;
 exports.component = component;
 exports.make = make;
 /* component Not a pure module */

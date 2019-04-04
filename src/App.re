@@ -1,39 +1,71 @@
 type route =
-	| Home
-	| Thing
-	| Thing2;
+	| LogIn
+	| Dashboard
+	| Page;
+
+module type Mapper = {
+  let toPage: ReasonReact.Router.url => route;
+  let toUrl: route => string;
+};
+
+module Mapper: Mapper = {
+  let toPage = (url: ReasonReact.Router.url) =>
+		switch (url.path) {
+			| ["login"] => LogIn
+			| ["dashboard"] => Dashboard
+			| ["page"] => Page
+			| _ => Dashboard
+    };
+  let toUrl = page =>
+    switch (page) {
+			| LogIn => "login"
+			| Dashboard => "dashboard"
+			| Page => "page"
+			| _ => "dashboard"
+	};
+};
 
 type state = {
 	route: route
 };
 
 type action = 
-	| ChangeRoute(route);
+	| ChangeRoute(route, string);
 
 let component = ReasonReact.reducerComponent("App")
-
-/* let mapUrlToRoute = (url: ReasonReact.Router.url) =>
-  switch url.path {
-  | ["home"] => Home
-  | ["thing"] => Thing
-  | ["thing2"] => Thing2
-  | _ => Home
-  }; */
 
 let make = (_children) => {
   ...component,
 
-  initialState: () => {route: Home},
+	initialState: () => {
+		route: ReasonReact.Router.dangerouslyGetInitialUrl() 
+			|> Mapper.toPage,
+	},	
+
+	/* subscriptions: self => [
+  	Sub(() => ReasonReact.Router.watchUrl(url =>
+			switch (url.hash) {
+				| "Dashboard" => self.send(Dummy)
+				| _ => self.send(Dummy)
+			}
+			),
+    	ReasonReact.Router.unwatchUrl,
+  	),
+	], */
 	
 	reducer: (action, _state) =>
 		switch (action) {
-		| ChangeRoute(route) => ReasonReact.Update({route:route})
+			| ChangeRoute(route, routeName) => {
+					ReasonReact.Router.replace(routeName)
+					ReasonReact.Update({route:route})
+				}
 		},
 		
 	/* didMount: self => {
 		let watcherID = ReasonReact.Router.watchUrl(url => {
 			switch (url.path) {
-			| (["home"]) => Home
+			| (["dashboard"]) => ()
+			| _ => ()
 			}
 		});
 	}, */
@@ -41,16 +73,15 @@ let make = (_children) => {
   render: self => {
 		<div>
 			<ul>
-				<li><button onClick={_event => self.send(ChangeRoute(Home))}>{ReasonReact.string("Home")}</button></li>
-				<li><button onClick={_event => self.send(ChangeRoute(Thing))}>{ReasonReact.string("Thing")}</button></li>
-				<li><button onClick={_event => self.send(ChangeRoute(Thing2))}>{ReasonReact.string("Thing 2")}</button></li>
+				<li><button onClick={_event => self.send(ChangeRoute(LogIn, "login"))}>{ReasonReact.string("Log In")}</button></li>
+				<li><button onClick={_event => self.send(ChangeRoute(Dashboard, "dashboard"))}>{ReasonReact.string("Dashboard")}</button></li>
+				<li><button onClick={_event => self.send(ChangeRoute(Page, "page"))}>{ReasonReact.string("Thing 1")}</button></li>
 			</ul>
-			( 
+			(
 				switch self.state.route {
-				| Home => <h1>{ReasonReact.string("Home")}</h1>
-				| Thing => <h1>{ReasonReact.string("Thing 1")}</h1>
-				| Thing2 => <h1>{ReasonReact.string("Thing 2")}</h1>
-				| _ => <h1>{ReasonReact.string("Home")}</h1>
+				| LogIn => <h1>{ReasonReact.string("Log In")}</h1>
+				| Dashboard => <h1>{ReasonReact.string("Dashboard")}</h1>
+				| Page => <h1>{ReasonReact.string("Lol it's a page")}</h1>
 				}
 			)
 		</div>;
