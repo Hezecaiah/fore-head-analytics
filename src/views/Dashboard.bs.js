@@ -4,6 +4,8 @@
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
+var Twitch = /* module */[];
+
 var component = ReasonReact.statelessComponent("Dashboard");
 
 function make(_children) {
@@ -18,7 +20,13 @@ function make(_children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, React.createElement("h1", undefined, "Here's the dashboard lol"), React.createElement("p", undefined, "Omegalul"));
+              return React.createElement("div", undefined, React.createElement("h1", undefined, "Here's the dashboard lol"), React.createElement("p", undefined, "Omegalul"), React.createElement("div", {
+                              id: "twitch-embed"
+                            }), React.createElement("ol", undefined, React.createElement("li", undefined, "streamer number 1"), React.createElement("li", undefined, "streamer number 2"), React.createElement("li", undefined, "streamer number 3")), React.createElement("script", {
+                              src: "https://embed.twitch.tv/embed/v1.js"
+                            }), React.createElement("script", {
+                              type: "text/javascript"
+                            }));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
@@ -27,6 +35,7 @@ function make(_children) {
         ];
 }
 
+exports.Twitch = Twitch;
 exports.component = component;
 exports.make = make;
 /* component Not a pure module */

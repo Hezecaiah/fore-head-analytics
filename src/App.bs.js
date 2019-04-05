@@ -76,16 +76,17 @@ function make(_children) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
               var match = self[/* state */1][/* route */0];
+              var match$1 = self[/* state */1][/* loggedIn */1];
               var tmp;
               switch (match) {
                 case 0 : 
                     tmp = ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 1 : 
-                    tmp = ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(/* array */[]));
+                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(/* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
-                    tmp = ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(/* array */[]));
+                    tmp = match$1 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(/* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 
               }
@@ -104,13 +105,24 @@ function make(_children) {
                                     }, "Judgement Page"))), tmp);
             }),
           /* initialState */(function (param) {
-              return /* record */[/* route */toPage(ReasonReact.Router[/* dangerouslyGetInitialUrl */4](/* () */0))];
+              return /* record */[
+                      /* route */toPage(ReasonReact.Router[/* dangerouslyGetInitialUrl */4](/* () */0)),
+                      /* loggedIn */true,
+                      /* credentials : tuple */[
+                        "",
+                        ""
+                      ]
+                    ];
             }),
           /* retainedProps */component[/* retainedProps */11],
-          /* reducer */(function (action, _state) {
+          /* reducer */(function (action, state) {
               var route = action[0];
               ReasonReact.Router[/* replace */1](toUrl(route));
-              return /* Update */Block.__(0, [/* record */[/* route */route]]);
+              return /* Update */Block.__(0, [/* record */[
+                          /* route */route,
+                          /* loggedIn */state[/* loggedIn */1],
+                          /* credentials */state[/* credentials */2]
+                        ]]);
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
         ];

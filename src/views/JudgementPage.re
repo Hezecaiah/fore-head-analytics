@@ -10,11 +10,8 @@
 	/* Component template declaration.
   	Needs to be **after** state and action declarations! */
 let component = ReasonReact.statelessComponent("Example");
-	
-	/* greeting and children are props. `children` isn't used, therefore ignored.
-		We ignore it by prepending it with an underscore */
+
 let make = (_children) => {
-	/* spread the other default fields of component here and override a few */
 	...component,
 
 	/* initialState: () => {  }, */
@@ -26,13 +23,7 @@ let make = (_children) => {
 		}, */
 
 	/* didMount: _self => {
-		[%bs.raw {|
-			new Twitch.Embed("twitch-embed", {
-				width: 854,
-				height: 480,
-				channel: "monstercat"
-			});
-		|}]
+
 	}, */
 
 	render: _self => {

@@ -18,7 +18,16 @@ function make(_children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, React.createElement("h1", undefined, "Log in here"), React.createElement("p", undefined, "Omegalul"));
+              return React.createElement("div", undefined, React.createElement("h1", undefined, "Log in with your Twitch credentials."), React.createElement("form", undefined, React.createElement("label", {
+                                  htmlFor: "username"
+                                }, "Twitch Username: "), React.createElement("input", {
+                                  id: "username"
+                                }), React.createElement("br", undefined), React.createElement("label", {
+                                  htmlFor: "password"
+                                }, "Twitch Password: "), React.createElement("input", {
+                                  id: "password",
+                                  type: "password"
+                                })));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

@@ -1,3 +1,9 @@
+/* %bs.raw {|require("https://embed.twitch.tv/embed/v1.js")|} */
+
+/* module Twitch = {
+	[@bs.new] [@bs.scope "Twitch"] external embed: (string, Js.t('a)) => unit = "Embed"; 
+} */
+
 type route =
 	| LogIn
 	| Dashboard
@@ -25,7 +31,9 @@ module Mapper: Mapper = {
 };
 
 type state = {
-	route: route
+	route: route,
+	loggedIn: bool,
+	credentials: (string, string)
 };
 
 type action = 
@@ -39,13 +47,15 @@ let make = (_children) => {
 	initialState: () => {
 		route: ReasonReact.Router.dangerouslyGetInitialUrl() 
 			|> Mapper.toPage,
+		loggedIn: true,
+		credentials: ("", "")
 	},
 	
-	reducer: (action, _state) => {
+	reducer: (action, state) => {
 		switch (action) {
 			| ChangeRoute(route) => 
 					ReasonReact.Router.replace(Mapper.toUrl(route))
-					ReasonReact.Update({route:route})
+					ReasonReact.Update({...state, route:route})
 		}
 	},
 
@@ -54,8 +64,14 @@ let make = (_children) => {
 			ReasonReact.Router.watchUrl(url =>
 				self.send(ChangeRoute(Mapper.toPage(url)))
 			)
-		/* Omegalul */
 		self.onUnmount(() => ReasonReact.Router.unwatchUrl(watcherID()));
+		/* {[%bs.raw {|
+			new window.Twitch.Embed("twitch-embed", {
+				width: 854,
+				height: 480,
+				channel: "monstercat"
+			})
+		|}]} */
 	},
 
   render: self => {
@@ -66,12 +82,22 @@ let make = (_children) => {
 				<li><button onClick={_event => self.send(ChangeRoute(JudgementPage))}>{ReasonReact.string("Judgement Page")}</button></li>
 			</ul>
 			(
-				switch self.state.route {
-				| LogIn => <LogIn />
-				| Dashboard => <Dashboard />
-				| JudgementPage => <JudgementPage />
+				switch (self.state.route, self.state.loggedIn) {
+				| (LogIn, _) => <LogIn />
+				| (Dashboard, true) => <Dashboard />
+				| (JudgementPage, true) => <JudgementPage />
+				| (_, false) => <LogIn />
 				}
 			)
+			/* <div id="twitch-embed"></div> */
+			/* <script>
+				new Twitch.Embed("twitch-embed", {
+					width: 854,
+					height: 480,
+					channel: "monstercat"
+				});
+			</script> */
+      /* <script src="https://embed.twitch.tv/embed/v1.js"></script> */
 		</div>;
   }
 };
