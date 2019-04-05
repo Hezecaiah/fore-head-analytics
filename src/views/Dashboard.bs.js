@@ -4,7 +4,7 @@
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
-var component = ReasonReact.statelessComponent("Example");
+var component = ReasonReact.statelessComponent("Dashboard");
 
 function make(_children) {
   return /* record */[

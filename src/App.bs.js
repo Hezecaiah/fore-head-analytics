@@ -5,7 +5,9 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Dashboard$ReactTemplate = require("./components/Dashboard.bs.js");
+var LogIn$ReactTemplate = require("./views/LogIn.bs.js");
+var Dashboard$ReactTemplate = require("./views/Dashboard.bs.js");
+var JudgementPage$ReactTemplate = require("./views/JudgementPage.bs.js");
 
 function toPage(url) {
   var match = url[/* path */0];
@@ -13,17 +15,17 @@ function toPage(url) {
     switch (match[0]) {
       case "dashboard" : 
           return /* Dashboard */1;
+      case "judgement" : 
+          if (match[1]) {
+            return /* Dashboard */1;
+          } else {
+            return /* JudgementPage */2;
+          }
       case "login" : 
           if (match[1]) {
             return /* Dashboard */1;
           } else {
             return /* LogIn */0;
-          }
-      case "page" : 
-          if (match[1]) {
-            return /* Dashboard */1;
-          } else {
-            return /* Page */2;
           }
       default:
         return /* Dashboard */1;
@@ -40,7 +42,7 @@ function toUrl(page) {
     case 1 : 
         return "dashboard";
     case 2 : 
-        return "page";
+        return "judgement";
     
   }
 }
@@ -77,13 +79,13 @@ function make(_children) {
               var tmp;
               switch (match) {
                 case 0 : 
-                    tmp = React.createElement("h1", undefined, "Log In");
+                    tmp = ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 1 : 
                     tmp = ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
-                    tmp = React.createElement("h1", undefined, "Lol it's a page");
+                    tmp = ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(/* array */[]));
                     break;
                 
               }
@@ -97,9 +99,9 @@ function make(_children) {
                                         })
                                     }, "Dashboard")), React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* Page */2]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* JudgementPage */2]);
                                         })
-                                    }, "Thing 1"))), tmp);
+                                    }, "Judgement Page"))), tmp);
             }),
           /* initialState */(function (param) {
               return /* record */[/* route */toPage(ReasonReact.Router[/* dangerouslyGetInitialUrl */4](/* () */0))];

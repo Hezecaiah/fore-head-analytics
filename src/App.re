@@ -1,7 +1,7 @@
 type route =
 	| LogIn
 	| Dashboard
-	| Page;
+	| JudgementPage;
 
 module type Mapper = {
   let toPage: ReasonReact.Router.url => route;
@@ -13,15 +13,14 @@ module Mapper: Mapper = {
 		switch (url.path) {
 			| ["login"] => LogIn
 			| ["dashboard"] => Dashboard
-			| ["page"] => Page
+			| ["judgement"] => JudgementPage
 			| _ => Dashboard;
     };
   let toUrl = page =>
     switch (page) {
 			| LogIn => "login"
 			| Dashboard => "dashboard"
-			| Page => "page"
-			| _ => "dashboard";
+			| JudgementPage => "judgement";
 	};
 };
 
@@ -64,13 +63,13 @@ let make = (_children) => {
 			<ul>
 				<li><button onClick={_event => self.send(ChangeRoute(LogIn))}>{ReasonReact.string("Log In")}</button></li>
 				<li><button onClick={_event => self.send(ChangeRoute(Dashboard))}>{ReasonReact.string("Dashboard")}</button></li>
-				<li><button onClick={_event => self.send(ChangeRoute(Page))}>{ReasonReact.string("Thing 1")}</button></li>
+				<li><button onClick={_event => self.send(ChangeRoute(JudgementPage))}>{ReasonReact.string("Judgement Page")}</button></li>
 			</ul>
 			(
 				switch self.state.route {
-				| LogIn => <h1>{ReasonReact.string("Log In")}</h1>
+				| LogIn => <LogIn />
 				| Dashboard => <Dashboard />
-				| Page => <h1>{ReasonReact.string("Lol it's a page")}</h1>
+				| JudgementPage => <JudgementPage />
 				}
 			)
 		</div>;
