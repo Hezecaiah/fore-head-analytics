@@ -65,13 +65,6 @@ let make = (_children) => {
 				self.send(ChangeRoute(Mapper.toPage(url)))
 			)
 		self.onUnmount(() => ReasonReact.Router.unwatchUrl(watcherID()));
-		/* {[%bs.raw {|
-			new window.Twitch.Embed("twitch-embed", {
-				width: 854,
-				height: 480,
-				channel: "monstercat"
-			})
-		|}]} */
 	},
 
   render: self => {

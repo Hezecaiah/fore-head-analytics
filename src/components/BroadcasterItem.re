@@ -7,8 +7,6 @@
 /* type action =
 	| ; */
 
-	/* Component template declaration.
-  	Needs to be **after** state and action declarations! */
 let component = ReasonReact.statelessComponent("Example");
 
 let make = (_children) => {
@@ -27,16 +25,8 @@ let make = (_children) => {
 	}, */
 
 	render: _self => {
-		<div>
-			<p>{ReasonReact.string("Do the thing")}</p>
-			<h1>{ReasonReact.string("Speak now or be eternally damned.")}</h1>
-			<ol>
-				<BroadcasterItem />
-				<BroadcasterItem />
-				<BroadcasterItem />
-				<BroadcasterItem />
-				<BroadcasterItem />
-			</ol>
-		</div>;
+		<>
+			<li>{ReasonReact.string("streamer number 1")}</li><button>{ReasonReact.string("Unfollow")}</button>
+		</>;
 	},
 };
