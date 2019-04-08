@@ -3,7 +3,6 @@ type route =
 	| Dashboard
 	| JudgementPage;
 
-
 type streamerJSON = {
 	to_name: string,
 	to_id: string,
@@ -14,8 +13,6 @@ type userJSON = {
 	total: int,
 	data: array(streamerJSON)
 };
-
-
 
 module Decode = {
 	let decodeStreamer = json =>
@@ -114,40 +111,14 @@ let make = (_children) => {
   render: self => {
 		<div className="container-fluid">
 
-			<nav className="navbar navbar-expand-lg navbar-light bg-light">
-				<a className="navbar-brand" href="#">{ReasonReact.string("Navbar")}</a>
-				/* <button className="navbar-toggler" type_="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span className="navbar-toggler-icon"></span>
-				</button> */
-			
-				<div className="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul className="navbar-nav mr-auto">
-						<li className="nav-item active">
-							<a className="nav-link" href="#">{ReasonReact.string("Home")}<span className="sr-only">{ReasonReact.string("(current)")}</span></a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="#">{ReasonReact.string("Link")}</a>
-						</li>
-						<li className="nav-item dropdown">
-							/* <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								{ReasonReact.string("Dropdown")}
-							</a> */
-							<div className="dropdown-menu">
-								<a className="dropdown-item" href="#">{ReasonReact.string("action")}</a>
-								<a className="dropdown-item" href="#">{ReasonReact.string("Another action")}</a>
-								<div className="dropdown-divider"></div>
-								<a className="dropdown-item" href="#">{ReasonReact.string("Yet another action")}</a>
-							</div>
-						</li>
-					</ul>
-				</div>
+			<nav className="nav nav-tabs navbar navbar-expand-lg" style=(
+				ReactDOMRe.Style.make(~background="#660000",())
+			)>
+				<a className="navbar-brand" style=(ReactDOMRe.Style.make(~color="white", ())) href="#">{ReasonReact.string("Navbar")}</a>
+				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(LogIn))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Log In")}</a></nav>
+				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(Dashboard))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Dashboard")}</a></nav>
+				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(JudgementPage))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Judgement")}</a></nav>
 			</nav>
-
-			<ul>
-				<li><button onClick={_event => self.send(ChangeRoute(LogIn))}>{ReasonReact.string("Log In")}</button></li>
-				<li><button onClick={_event => self.send(ChangeRoute(Dashboard))}>{ReasonReact.string("Dashboard")}</button></li>
-				<li><button onClick={_event => self.send(ChangeRoute(JudgementPage))}>{ReasonReact.string("Judgement Page")}</button></li>
-			</ul>
 			/* <div id="twitch-embed"></div> */
 			(
 				switch (self.state.route, self.state.loggedIn) {

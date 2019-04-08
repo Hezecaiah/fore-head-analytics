@@ -24,9 +24,15 @@ function make(data, _children) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
               var match = data.length !== 0;
-              return React.createElement("div", undefined, React.createElement("h1", undefined, "Here's the dashboard lol"), match ? $$Array.map((function (streamer) {
-                                  return ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(streamer, /* array */[]));
-                                }), data) : React.createElement("div", undefined));
+              return React.createElement("div", {
+                          className: "align-content-center"
+                        }, React.createElement("h1", undefined, "Here's the dashboard lol"), React.createElement("div", {
+                              className: "row"
+                            }, match ? $$Array.map((function (streamer) {
+                                      return React.createElement("div", {
+                                                  className: "col-sm-3"
+                                                }, ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(streamer, /* array */[])));
+                                    }), data) : React.createElement("div", undefined)));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

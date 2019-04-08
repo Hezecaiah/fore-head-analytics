@@ -29,7 +29,7 @@ let make = (_children) => {
 	render: _self => {
 		<div>
 			<p>{ReasonReact.string("Do the thing")}</p>
-			<h1>{ReasonReact.string("Speak now or be eternally damned.")}</h1>
+			<h1>{ReasonReact.string("Haha lol")}</h1>
 		</div>;
 	},
 };

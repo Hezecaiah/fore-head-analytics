@@ -34,5 +34,5 @@ let make = (~broadcasterObject, _children) => {
 		<>
 			<p>{ReasonReact.string("Streamer title: ")}</p><button>{ReasonReact.string("Unfollow")}</button>
 		</>;
-	},
+	}
 };

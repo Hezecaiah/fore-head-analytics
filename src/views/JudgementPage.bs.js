@@ -18,7 +18,7 @@ function make(_children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, React.createElement("p", undefined, "Do the thing"), React.createElement("h1", undefined, "Speak now or be eternally damned."));
+              return React.createElement("div", undefined, React.createElement("p", undefined, "Do the thing"), React.createElement("h1", undefined, "Haha lol"));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

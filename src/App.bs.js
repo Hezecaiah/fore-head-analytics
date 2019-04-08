@@ -128,55 +128,50 @@ function make(_children) {
               return React.createElement("div", {
                           className: "container-fluid"
                         }, React.createElement("nav", {
-                              className: "navbar navbar-expand-lg navbar-light bg-light"
+                              className: "nav nav-tabs navbar navbar-expand-lg",
+                              style: {
+                                background: "#660000"
+                              }
                             }, React.createElement("a", {
                                   className: "navbar-brand",
+                                  style: {
+                                    color: "white"
+                                  },
                                   href: "#"
-                                }, "Navbar"), React.createElement("div", {
-                                  className: "collapse navbar-collapse",
-                                  id: "navbarSupportedContent"
-                                }, React.createElement("ul", {
-                                      className: "navbar-nav mr-auto"
-                                    }, React.createElement("li", {
-                                          className: "nav-item active"
-                                        }, React.createElement("a", {
-                                              className: "nav-link",
-                                              href: "#"
-                                            }, "Home", React.createElement("span", {
-                                                  className: "sr-only"
-                                                }, "(current)"))), React.createElement("li", {
-                                          className: "nav-item"
-                                        }, React.createElement("a", {
-                                              className: "nav-link",
-                                              href: "#"
-                                            }, "Link")), React.createElement("li", {
-                                          className: "nav-item dropdown"
-                                        }, React.createElement("div", {
-                                              className: "dropdown-menu"
-                                            }, React.createElement("a", {
-                                                  className: "dropdown-item",
-                                                  href: "#"
-                                                }, "action"), React.createElement("a", {
-                                                  className: "dropdown-item",
-                                                  href: "#"
-                                                }, "Another action"), React.createElement("div", {
-                                                  className: "dropdown-divider"
-                                                }), React.createElement("a", {
-                                                  className: "dropdown-item",
-                                                  href: "#"
-                                                }, "Yet another action")))))), React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement("button", {
-                                      onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
-                                        })
-                                    }, "Log In")), React.createElement("li", undefined, React.createElement("button", {
-                                      onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* Dashboard */1]));
-                                        })
-                                    }, "Dashboard")), React.createElement("li", undefined, React.createElement("button", {
-                                      onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* JudgementPage */2]));
-                                        })
-                                    }, "Judgement Page"))), tmp);
+                                }, "Navbar"), React.createElement("nav", {
+                                  className: "nav-item",
+                                  onClick: (function (_event) {
+                                      return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
+                                    })
+                                }, React.createElement("a", {
+                                      className: "nav-link",
+                                      style: {
+                                        color: "white"
+                                      },
+                                      href: "#"
+                                    }, "Log In")), React.createElement("nav", {
+                                  className: "nav-item",
+                                  onClick: (function (_event) {
+                                      return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* Dashboard */1]));
+                                    })
+                                }, React.createElement("a", {
+                                      className: "nav-link",
+                                      style: {
+                                        color: "white"
+                                      },
+                                      href: "#"
+                                    }, "Dashboard")), React.createElement("nav", {
+                                  className: "nav-item",
+                                  onClick: (function (_event) {
+                                      return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* JudgementPage */2]));
+                                    })
+                                }, React.createElement("a", {
+                                      className: "nav-link",
+                                      style: {
+                                        color: "white"
+                                      },
+                                      href: "#"
+                                    }, "Judgement"))), tmp);
             }),
           /* initialState */(function (param) {
               return /* record */[
