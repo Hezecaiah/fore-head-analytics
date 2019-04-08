@@ -87,9 +87,7 @@ let make = (_children) => {
 
 	didMount: self => {
 		let watcherID = () =>
-			ReasonReact.Router.watchUrl(url =>
-				self.send(ChangeRoute(Mapper.toPage(url)))
-			)
+			ReasonReact.Router.watchUrl(url => self.send(ChangeRoute(Mapper.toPage(url))))
 		self.onUnmount(() => ReasonReact.Router.unwatchUrl(watcherID()));
 		Js.Promise.(
 			Fetch.fetchWithInit("https://api.twitch.tv/helix/users/follows?from_id=114494398",
@@ -110,10 +108,7 @@ let make = (_children) => {
 
   render: self => {
 		<div className="container-fluid">
-
-			<nav className="nav nav-tabs navbar navbar-expand-lg" style=(
-				ReactDOMRe.Style.make(~background="#660000",())
-			)>
+			<nav className="nav nav-tabs navbar navbar-expand-lg" style=(ReactDOMRe.Style.make(~background="#660000",()))>
 				<a className="navbar-brand" style=(ReactDOMRe.Style.make(~color="white", ())) href="#">{ReasonReact.string("Navbar")}</a>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(LogIn))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Log In")}</a></nav>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(Dashboard))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Dashboard")}</a></nav>
