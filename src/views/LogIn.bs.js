@@ -27,7 +27,9 @@ function make(_children) {
                                 }, "Twitch Password: "), React.createElement("input", {
                                   id: "password",
                                   type: "password"
-                                })));
+                                }), React.createElement("br", undefined), React.createElement("button", {
+                                  type: "submit"
+                                }, "Log in")));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

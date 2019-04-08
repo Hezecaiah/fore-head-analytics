@@ -12,6 +12,8 @@ let make = (_children) => {
 				<br></br>
 				<label htmlFor="password">{ReasonReact.string("Twitch Password: ")}</label>
 				<input type_="password" id="password"></input>
+				<br></br>
+				<button type_="submit">{ReasonReact.string("Log in")}</button>
 			</form>
     </div>;
   },

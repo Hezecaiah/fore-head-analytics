@@ -7,9 +7,15 @@
 /* type action =
 	| ; */
 
+	/* type streamerJSON = {
+		to_name: string,
+		to_id: string,
+		followed_at: string
+	} */
+
 let component = ReasonReact.statelessComponent("Example");
 
-let make = (~number, _children) => {
+let make = (~broadcasterObject, _children) => {
 	...component,
 
 	/* initialState: () => {  }, */
@@ -20,13 +26,13 @@ let make = (~number, _children) => {
 
 		}, */
 
-	/* didMount: _self => {
+	didMount: _self => {
+		Js.log(broadcasterObject)
+	},
 
-	}, */
-
-	render: self => {
+	render: _self => {
 		<>
-			<li>{ReasonReact.string("Streamer number: " ++ string_of_int(number))}</li><button>{ReasonReact.string("Unfollow")}</button>
+			<p>{ReasonReact.string("Streamer title: ")}</p><button>{ReasonReact.string("Unfollow")}</button>
 		</>;
 	},
 };

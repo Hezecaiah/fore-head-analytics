@@ -28,20 +28,12 @@ let make = (~data, _children) => {
   render: _self => {
     <div>
 			<h1>{ReasonReact.string("Here's the dashboard lol")}</h1>
-      <p>{ReasonReact.string("Omegalul")}</p>
-      /* <div id="twitch-embed"></div> */
-      /* {ReasonReact.array(Array.map(streamer => {
-        (
-          <BroadcasterItem number=2/>
-        )
-      }, data)} */
-      /* <ol>
-        <BroadcasterItem number=1/>
-        <BroadcasterItem number=2/>
-        <BroadcasterItem number=3/>
-        <BroadcasterItem number=4/>
-        <BroadcasterItem number=5/>
-      </ol> */
+      {Array.length(data) > 0 ? ReasonReact.array(Array.map(streamer => {
+        (<BroadcasterItem broadcasterObject={streamer}/>)
+      }, data))
+        :
+        <div/>
+      }
     </div>;
   },
 };

@@ -3,10 +3,11 @@ type route =
 	| Dashboard
 	| JudgementPage;
 
+
 type streamerJSON = {
-	followed_at: string,
+	to_name: string,
 	to_id: string,
-	to_name: string
+	followed_at: string
 }
 
 type userJSON = {
@@ -14,12 +15,14 @@ type userJSON = {
 	data: array(streamerJSON)
 };
 
+
+
 module Decode = {
 	let decodeStreamer = json =>
 		Json.Decode.{
-			followed_at: json |> field("followed_at", string),
+			to_name: json |> field("to_name", string),
 			to_id: json |> field("to_id", string),
-			to_name: json |> field("to_name", string)
+			followed_at: json |> field("followed_at", string)
 		};
 
 	let decodeUser = json => 
@@ -54,12 +57,13 @@ type state = {
 	route: route,
 	loggedIn: bool,
 	credentials: (string, string),
-	followData: array(userJSON)
+	followData: userJSON
 };
 
 type action = 
 	| ChangeRoute(route)
-	| SetData(userJSON);
+	| SetData(userJSON)
+	| FailedToFetch(string);
 
 let component = ReasonReact.reducerComponent("App");
 
@@ -71,7 +75,7 @@ let make = (_children) => {
 			|> Mapper.toPage,
 		loggedIn: true,
 		credentials: ("", ""),
-		followData: [||]
+		followData: {total: 0, data:[||]}
 	},
 	
 	reducer: (action, state) => {
@@ -79,10 +83,8 @@ let make = (_children) => {
 			| ChangeRoute(route) => 
 					ReasonReact.Router.replace(Mapper.toUrl(route))
 					ReasonReact.Update({...state, route:route})
-			| SetData(data) => 
-				Js.log(Array.make(1, data))
-
-				ReasonReact.Update({...state, followData: Array.make(1, data)})
+			| SetData(data) => ReasonReact.Update({...state, followData: data})
+			| FailedToFetch(fetchLocation) => ReasonReact.SideEffects(_self => Js.log("Error, failed to fetch data from " ++ fetchLocation ++ "."))
 		}
 	},
 
@@ -104,22 +106,53 @@ let make = (_children) => {
 							|> decodedJSON => self.send(SetData(decodedJSON))
 							|> resolve
 			)
-			/* |> catch(err => resolve(Js.Promise.resolve(self.send))) */
+			|> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API"))))
 			|> ignore
 		)
 	},
 
   render: self => {
-		<div>
+		<div className="container-fluid">
+
+			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+				<a className="navbar-brand" href="#">{ReasonReact.string("Navbar")}</a>
+				/* <button className="navbar-toggler" type_="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span className="navbar-toggler-icon"></span>
+				</button> */
+			
+				<div className="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul className="navbar-nav mr-auto">
+						<li className="nav-item active">
+							<a className="nav-link" href="#">{ReasonReact.string("Home")}<span className="sr-only">{ReasonReact.string("(current)")}</span></a>
+						</li>
+						<li className="nav-item">
+							<a className="nav-link" href="#">{ReasonReact.string("Link")}</a>
+						</li>
+						<li className="nav-item dropdown">
+							/* <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{ReasonReact.string("Dropdown")}
+							</a> */
+							<div className="dropdown-menu">
+								<a className="dropdown-item" href="#">{ReasonReact.string("action")}</a>
+								<a className="dropdown-item" href="#">{ReasonReact.string("Another action")}</a>
+								<div className="dropdown-divider"></div>
+								<a className="dropdown-item" href="#">{ReasonReact.string("Yet another action")}</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
 			<ul>
 				<li><button onClick={_event => self.send(ChangeRoute(LogIn))}>{ReasonReact.string("Log In")}</button></li>
 				<li><button onClick={_event => self.send(ChangeRoute(Dashboard))}>{ReasonReact.string("Dashboard")}</button></li>
 				<li><button onClick={_event => self.send(ChangeRoute(JudgementPage))}>{ReasonReact.string("Judgement Page")}</button></li>
 			</ul>
+			/* <div id="twitch-embed"></div> */
 			(
 				switch (self.state.route, self.state.loggedIn) {
 				| (LogIn, _) => <LogIn />
-				| (Dashboard, true) => <Dashboard data=self.state.followData/>
+				| (Dashboard, true) => <Dashboard data={self.state.followData.data}/>
 				| (JudgementPage, true) => <JudgementPage />
 				| (_, false) => <LogIn />
 				}

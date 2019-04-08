@@ -5,7 +5,6 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var Fetch = require("bs-fetch/src/Fetch.js");
 var React = require("react");
-var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var LogIn$ReactTemplate = require("./views/LogIn.bs.js");
@@ -14,9 +13,9 @@ var JudgementPage$ReactTemplate = require("./views/JudgementPage.bs.js");
 
 function decodeStreamer(json) {
   return /* record */[
-          /* followed_at */Json_decode.field("followed_at", Json_decode.string, json),
+          /* to_name */Json_decode.field("to_name", Json_decode.string, json),
           /* to_id */Json_decode.field("to_id", Json_decode.string, json),
-          /* to_name */Json_decode.field("to_name", Json_decode.string, json)
+          /* followed_at */Json_decode.field("followed_at", Json_decode.string, json)
         ];
 }
 
@@ -95,12 +94,14 @@ function make(_children) {
                       return ReasonReact.Router[/* unwatchUrl */3](watcherID(/* () */0));
                     }));
               fetch("https://api.twitch.tv/helix/users/follows?from_id=114494398", Fetch.RequestInit[/* make */0](undefined, {
-                              "Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"
-                            }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0)).then((function (prim) {
-                        return prim.json();
-                      })).then((function (json) {
-                      var decodedJSON = decodeUser(json);
-                      return Promise.resolve(Curry._1(self[/* send */3], /* SetData */Block.__(1, [decodedJSON])));
+                                "Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"
+                              }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0)).then((function (prim) {
+                          return prim.json();
+                        })).then((function (json) {
+                        var decodedJSON = decodeUser(json);
+                        return Promise.resolve(Curry._1(self[/* send */3], /* SetData */Block.__(1, [decodedJSON])));
+                      })).catch((function (_err) {
+                      return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(2, ["Twitch API"])));
                     }));
               return /* () */0;
             }),
@@ -117,14 +118,53 @@ function make(_children) {
                     tmp = ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 1 : 
-                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */3], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
+                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */3][/* data */1], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
                     tmp = match$1 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(/* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 
               }
-              return React.createElement("div", undefined, React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement("button", {
+              return React.createElement("div", {
+                          className: "container-fluid"
+                        }, React.createElement("nav", {
+                              className: "navbar navbar-expand-lg navbar-light bg-light"
+                            }, React.createElement("a", {
+                                  className: "navbar-brand",
+                                  href: "#"
+                                }, "Navbar"), React.createElement("div", {
+                                  className: "collapse navbar-collapse",
+                                  id: "navbarSupportedContent"
+                                }, React.createElement("ul", {
+                                      className: "navbar-nav mr-auto"
+                                    }, React.createElement("li", {
+                                          className: "nav-item active"
+                                        }, React.createElement("a", {
+                                              className: "nav-link",
+                                              href: "#"
+                                            }, "Home", React.createElement("span", {
+                                                  className: "sr-only"
+                                                }, "(current)"))), React.createElement("li", {
+                                          className: "nav-item"
+                                        }, React.createElement("a", {
+                                              className: "nav-link",
+                                              href: "#"
+                                            }, "Link")), React.createElement("li", {
+                                          className: "nav-item dropdown"
+                                        }, React.createElement("div", {
+                                              className: "dropdown-menu"
+                                            }, React.createElement("a", {
+                                                  className: "dropdown-item",
+                                                  href: "#"
+                                                }, "action"), React.createElement("a", {
+                                                  className: "dropdown-item",
+                                                  href: "#"
+                                                }, "Another action"), React.createElement("div", {
+                                                  className: "dropdown-divider"
+                                                }), React.createElement("a", {
+                                                  className: "dropdown-item",
+                                                  href: "#"
+                                                }, "Yet another action")))))), React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
                                           return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
                                         })
@@ -146,29 +186,38 @@ function make(_children) {
                         "",
                         ""
                       ],
-                      /* followData : array */[]
+                      /* followData : record */[
+                        /* total */0,
+                        /* data : array */[]
+                      ]
                     ];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
-              if (action.tag) {
-                var data = action[0];
-                console.log(Caml_array.caml_make_vect(1, data));
-                return /* Update */Block.__(0, [/* record */[
-                            /* route */state[/* route */0],
-                            /* loggedIn */state[/* loggedIn */1],
-                            /* credentials */state[/* credentials */2],
-                            /* followData */Caml_array.caml_make_vect(1, data)
-                          ]]);
-              } else {
-                var route = action[0];
-                ReasonReact.Router[/* replace */1](toUrl(route));
-                return /* Update */Block.__(0, [/* record */[
-                            /* route */route,
-                            /* loggedIn */state[/* loggedIn */1],
-                            /* credentials */state[/* credentials */2],
-                            /* followData */state[/* followData */3]
-                          ]]);
+              switch (action.tag | 0) {
+                case 0 : 
+                    var route = action[0];
+                    ReasonReact.Router[/* replace */1](toUrl(route));
+                    return /* Update */Block.__(0, [/* record */[
+                                /* route */route,
+                                /* loggedIn */state[/* loggedIn */1],
+                                /* credentials */state[/* credentials */2],
+                                /* followData */state[/* followData */3]
+                              ]]);
+                case 1 : 
+                    return /* Update */Block.__(0, [/* record */[
+                                /* route */state[/* route */0],
+                                /* loggedIn */state[/* loggedIn */1],
+                                /* credentials */state[/* credentials */2],
+                                /* followData */action[0]
+                              ]]);
+                case 2 : 
+                    var fetchLocation = action[0];
+                    return /* SideEffects */Block.__(1, [(function (_self) {
+                                  console.log("Error, failed to fetch data from " + (fetchLocation + "."));
+                                  return /* () */0;
+                                })]);
+                
               }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
