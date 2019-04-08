@@ -9,7 +9,7 @@
 
 let component = ReasonReact.statelessComponent("Dashboard");
 
-let make = (_children) => {
+let make = (~data, _children) => {
   
   ...component,
 
@@ -21,24 +21,27 @@ let make = (_children) => {
 
     }, */
 
-  /* didMount: _self => {
-    /* new Twitch.Embed("twitch-embed", {
-      width: 854,
-      height: 480,
-      channel: "monstercat"
-    }) */
-  }, */
+  didMount: _self => {
+    Js.log(data)
+  },
 
   render: _self => {
     <div>
 			<h1>{ReasonReact.string("Here's the dashboard lol")}</h1>
       <p>{ReasonReact.string("Omegalul")}</p>
       /* <div id="twitch-embed"></div> */
-      <ol>
-        <li>{ReasonReact.string("streamer number 1")}</li>
-        <li>{ReasonReact.string("streamer number 2")}</li>
-        <li>{ReasonReact.string("streamer number 3")}</li>
-      </ol>
+      /* {ReasonReact.array(Array.map(streamer => {
+        (
+          <BroadcasterItem number=2/>
+        )
+      }, data)} */
+      /* <ol>
+        <BroadcasterItem number=1/>
+        <BroadcasterItem number=2/>
+        <BroadcasterItem number=3/>
+        <BroadcasterItem number=4/>
+        <BroadcasterItem number=5/>
+      </ol> */
     </div>;
   },
 };

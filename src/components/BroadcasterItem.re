@@ -9,7 +9,7 @@
 
 let component = ReasonReact.statelessComponent("Example");
 
-let make = (_children) => {
+let make = (~number, _children) => {
 	...component,
 
 	/* initialState: () => {  }, */
@@ -24,9 +24,9 @@ let make = (_children) => {
 
 	}, */
 
-	render: _self => {
+	render: self => {
 		<>
-			<li>{ReasonReact.string("streamer number 1")}</li><button>{ReasonReact.string("Unfollow")}</button>
+			<li>{ReasonReact.string("Streamer number: " ++ string_of_int(number))}</li><button>{ReasonReact.string("Unfollow")}</button>
 		</>;
 	},
 };

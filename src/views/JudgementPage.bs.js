@@ -19,7 +19,7 @@ function make(_children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, React.createElement("p", undefined, "Do the thing"), React.createElement("h1", undefined, "Speak now or be eternally damned."), React.createElement("ol", undefined, ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(/* array */[])), ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(/* array */[])), ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(/* array */[])), ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(/* array */[])), ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(/* array */[]))));
+              return React.createElement("div", undefined, React.createElement("p", undefined, "Do the thing"), React.createElement("h1", undefined, "Speak now or be eternally damned."), React.createElement("ol", undefined, ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(5, /* array */[])), ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(4, /* array */[])), ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(3, /* array */[]))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

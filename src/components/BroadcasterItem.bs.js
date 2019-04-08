@@ -6,7 +6,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.statelessComponent("Example");
 
-function make(_children) {
+function make(number, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -17,8 +17,8 @@ function make(_children) {
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
-          /* render */(function (_self) {
-              return React.createElement(React.Fragment, undefined, React.createElement("li", undefined, "streamer number 1"), React.createElement("button", undefined, "Unfollow"));
+          /* render */(function (self) {
+              return React.createElement(React.Fragment, undefined, React.createElement("li", undefined, "Streamer number: " + String(number)), React.createElement("button", undefined, "Unfollow"));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

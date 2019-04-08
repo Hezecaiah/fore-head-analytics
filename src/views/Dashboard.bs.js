@@ -6,19 +6,22 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.statelessComponent("Dashboard");
 
-function make(_children) {
+function make(data, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
           /* handedOffState */component[/* handedOffState */2],
           /* willReceiveProps */component[/* willReceiveProps */3],
-          /* didMount */component[/* didMount */4],
+          /* didMount */(function (_self) {
+              console.log(data);
+              return /* () */0;
+            }),
           /* didUpdate */component[/* didUpdate */5],
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, React.createElement("h1", undefined, "Here's the dashboard lol"), React.createElement("p", undefined, "Omegalul"), React.createElement("ol", undefined, React.createElement("li", undefined, "streamer number 1"), React.createElement("li", undefined, "streamer number 2"), React.createElement("li", undefined, "streamer number 3")));
+              return React.createElement("div", undefined, React.createElement("h1", undefined, "Here's the dashboard lol"), React.createElement("p", undefined, "Omegalul"));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

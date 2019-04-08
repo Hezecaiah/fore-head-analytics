@@ -31,11 +31,9 @@ let make = (_children) => {
 			<p>{ReasonReact.string("Do the thing")}</p>
 			<h1>{ReasonReact.string("Speak now or be eternally damned.")}</h1>
 			<ol>
-				<BroadcasterItem />
-				<BroadcasterItem />
-				<BroadcasterItem />
-				<BroadcasterItem />
-				<BroadcasterItem />
+				<BroadcasterItem number=5/>
+				<BroadcasterItem number=4/>
+				<BroadcasterItem number=3/>
 			</ol>
 		</div>;
 	},

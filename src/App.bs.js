@@ -3,11 +3,36 @@
 
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
+var Fetch = require("bs-fetch/src/Fetch.js");
 var React = require("react");
+var Caml_array = require("bs-platform/lib/js/caml_array.js");
+var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var LogIn$ReactTemplate = require("./views/LogIn.bs.js");
 var Dashboard$ReactTemplate = require("./views/Dashboard.bs.js");
 var JudgementPage$ReactTemplate = require("./views/JudgementPage.bs.js");
+
+function decodeStreamer(json) {
+  return /* record */[
+          /* followed_at */Json_decode.field("followed_at", Json_decode.string, json),
+          /* to_id */Json_decode.field("to_id", Json_decode.string, json),
+          /* to_name */Json_decode.field("to_name", Json_decode.string, json)
+        ];
+}
+
+function decodeUser(json) {
+  return /* record */[
+          /* total */Json_decode.field("total", Json_decode.$$int, json),
+          /* data */Json_decode.field("data", (function (param) {
+                  return Json_decode.array(decodeStreamer, param);
+                }), json)
+        ];
+}
+
+var Decode = /* module */[
+  /* decodeStreamer */decodeStreamer,
+  /* decodeUser */decodeUser
+];
 
 function toPage(url) {
   var match = url[/* path */0];
@@ -63,12 +88,21 @@ function make(_children) {
           /* didMount */(function (self) {
               var watcherID = function (param) {
                 return ReasonReact.Router[/* watchUrl */2]((function (url) {
-                              return Curry._1(self[/* send */3], /* ChangeRoute */[toPage(url)]);
+                              return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [toPage(url)]));
                             }));
               };
-              return Curry._1(self[/* onUnmount */4], (function (param) {
-                            return ReasonReact.Router[/* unwatchUrl */3](watcherID(/* () */0));
-                          }));
+              Curry._1(self[/* onUnmount */4], (function (param) {
+                      return ReasonReact.Router[/* unwatchUrl */3](watcherID(/* () */0));
+                    }));
+              fetch("https://api.twitch.tv/helix/users/follows?from_id=114494398", Fetch.RequestInit[/* make */0](undefined, {
+                              "Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"
+                            }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0)).then((function (prim) {
+                        return prim.json();
+                      })).then((function (json) {
+                      var decodedJSON = decodeUser(json);
+                      return Promise.resolve(Curry._1(self[/* send */3], /* SetData */Block.__(1, [decodedJSON])));
+                    }));
+              return /* () */0;
             }),
           /* didUpdate */component[/* didUpdate */5],
           /* willUnmount */component[/* willUnmount */6],
@@ -83,7 +117,7 @@ function make(_children) {
                     tmp = ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 1 : 
-                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(/* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
+                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */3], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
                     tmp = match$1 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(/* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
@@ -92,15 +126,15 @@ function make(_children) {
               }
               return React.createElement("div", undefined, React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* LogIn */0]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
                                         })
                                     }, "Log In")), React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* Dashboard */1]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* Dashboard */1]));
                                         })
                                     }, "Dashboard")), React.createElement("li", undefined, React.createElement("button", {
                                       onClick: (function (_event) {
-                                          return Curry._1(self[/* send */3], /* ChangeRoute */[/* JudgementPage */2]);
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* JudgementPage */2]));
                                         })
                                     }, "Judgement Page"))), tmp);
             }),
@@ -111,23 +145,37 @@ function make(_children) {
                       /* credentials : tuple */[
                         "",
                         ""
-                      ]
+                      ],
+                      /* followData : array */[]
                     ];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
-              var route = action[0];
-              ReasonReact.Router[/* replace */1](toUrl(route));
-              return /* Update */Block.__(0, [/* record */[
-                          /* route */route,
-                          /* loggedIn */state[/* loggedIn */1],
-                          /* credentials */state[/* credentials */2]
-                        ]]);
+              if (action.tag) {
+                var data = action[0];
+                console.log(Caml_array.caml_make_vect(1, data));
+                return /* Update */Block.__(0, [/* record */[
+                            /* route */state[/* route */0],
+                            /* loggedIn */state[/* loggedIn */1],
+                            /* credentials */state[/* credentials */2],
+                            /* followData */Caml_array.caml_make_vect(1, data)
+                          ]]);
+              } else {
+                var route = action[0];
+                ReasonReact.Router[/* replace */1](toUrl(route));
+                return /* Update */Block.__(0, [/* record */[
+                            /* route */route,
+                            /* loggedIn */state[/* loggedIn */1],
+                            /* credentials */state[/* credentials */2],
+                            /* followData */state[/* followData */3]
+                          ]]);
+              }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
         ];
 }
 
+exports.Decode = Decode;
 exports.Mapper = Mapper;
 exports.component = component;
 exports.make = make;
