@@ -66,7 +66,7 @@ let make = (~broadcasterObject, _children) => {
 	/* State transitions */
 	reducer: (action, state) =>
 		switch (action) {
-			|AssignData(data) => ReasonReact.Update({data: data})
+			|AssignData(dataSent) => ReasonReact.Update({data: dataSent[0]})
 		},
 
 	didMount: self => {
