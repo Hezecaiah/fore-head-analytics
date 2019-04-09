@@ -22,15 +22,37 @@ function decodeStreamer(json) {
 function decodeUser(json) {
   return /* record */[
           /* total */Json_decode.field("total", Json_decode.$$int, json),
-          /* data */Json_decode.field("data", (function (param) {
+          /* userData */Json_decode.field("data", (function (param) {
                   return Json_decode.array(decodeStreamer, param);
                 }), json)
         ];
 }
 
+function decodeJSON(json) {
+  return /* record */[
+          /* id */Json_decode.field("id", Json_decode.string, json),
+          /* login */Json_decode.field("login", Json_decode.string, json),
+          /* display_name */Json_decode.field("display_name", Json_decode.string, json),
+          /* account_type */Json_decode.field("type", Json_decode.string, json),
+          /* broadcaster_type */Json_decode.field("broadcaster_type", Json_decode.string, json),
+          /* description */Json_decode.field("description", Json_decode.string, json),
+          /* profile_image_url */Json_decode.field("profile_image_url", Json_decode.string, json),
+          /* offline_image_url */Json_decode.field("offline_image_url", Json_decode.string, json),
+          /* view_count */Json_decode.field("view_count", Json_decode.$$int, json)
+        ];
+}
+
+function decodeData(json) {
+  return /* record */[/* followData */Json_decode.field("data", (function (param) {
+                  return Json_decode.array(decodeJSON, param);
+                }), json)];
+}
+
 var Decode = /* module */[
   /* decodeStreamer */decodeStreamer,
-  /* decodeUser */decodeUser
+  /* decodeUser */decodeUser,
+  /* decodeJSON */decodeJSON,
+  /* decodeData */decodeData
 ];
 
 function toPage(url) {
@@ -101,7 +123,16 @@ function make(_children) {
                         var decodedJSON = decodeUser(json);
                         return Promise.resolve(Curry._1(self[/* send */3], /* SetData */Block.__(1, [decodedJSON])));
                       })).catch((function (_err) {
-                      return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(2, ["Twitch API"])));
+                      return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(3, ["Twitch API"])));
+                    }));
+              fetch("https://api.twitch.tv/helix/users?" + self[/* state */1][/* tempStr */5], Fetch.RequestInit[/* make */0](undefined, {
+                              "Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"
+                            }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0)).then((function (prim) {
+                        return prim.json();
+                      })).then((function (json) {
+                      var decodedData = decodeData(json);
+                      var decodedJSON = decodedData[/* followData */0];
+                      return Promise.resolve(Curry._1(self[/* send */3], /* SetVerboseData */Block.__(2, [decodedJSON])));
                     }));
               return /* () */0;
             }),
@@ -118,7 +149,7 @@ function make(_children) {
                     tmp = ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 1 : 
-                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */3][/* data */1], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
+                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */4], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
                     tmp = match$1 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(/* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
@@ -181,10 +212,12 @@ function make(_children) {
                         "",
                         ""
                       ],
-                      /* followData : record */[
+                      /* userData : record */[
                         /* total */0,
-                        /* data : array */[]
-                      ]
+                        /* userData : array */[]
+                      ],
+                      /* followData : array */[],
+                      /* tempStr */""
                     ];
             }),
           /* retainedProps */component[/* retainedProps */11],
@@ -197,16 +230,29 @@ function make(_children) {
                                 /* route */route,
                                 /* loggedIn */state[/* loggedIn */1],
                                 /* credentials */state[/* credentials */2],
-                                /* followData */state[/* followData */3]
+                                /* userData */state[/* userData */3],
+                                /* followData */state[/* followData */4],
+                                /* tempStr */state[/* tempStr */5]
                               ]]);
                 case 1 : 
                     return /* Update */Block.__(0, [/* record */[
                                 /* route */state[/* route */0],
                                 /* loggedIn */state[/* loggedIn */1],
                                 /* credentials */state[/* credentials */2],
-                                /* followData */action[0]
+                                /* userData */action[0],
+                                /* followData */state[/* followData */4],
+                                /* tempStr */state[/* tempStr */5]
                               ]]);
                 case 2 : 
+                    return /* Update */Block.__(0, [/* record */[
+                                /* route */state[/* route */0],
+                                /* loggedIn */state[/* loggedIn */1],
+                                /* credentials */state[/* credentials */2],
+                                /* userData */state[/* userData */3],
+                                /* followData */action[0],
+                                /* tempStr */state[/* tempStr */5]
+                              ]]);
+                case 3 : 
                     var fetchLocation = action[0];
                     return /* SideEffects */Block.__(1, [(function (_self) {
                                   console.log("Error, failed to fetch data from " + (fetchLocation + "."));

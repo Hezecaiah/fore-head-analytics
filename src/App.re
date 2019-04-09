@@ -11,10 +11,30 @@ type streamerJSON = {
 
 type userJSON = {
 	total: int,
-	data: array(streamerJSON)
+	userData: array(streamerJSON)
 };
 
+open TypesModule
+
+/* type broadcasterVerbose = {
+	id: string,
+	login: string,
+	display_name: string,
+	account_type: string,
+	broadcaster_type: string,
+	description: string,
+	profile_image_url: string,
+	offline_image_url: string,
+	view_count: int,
+}; */
+
+type streamerJSONVerbose = {
+	followData: array(TypesModule.broadcasterVerbose)
+};
+
+
 module Decode = {
+
 	let decodeStreamer = json =>
 		Json.Decode.{
 			to_name: json |> field("to_name", string),
@@ -25,7 +45,25 @@ module Decode = {
 	let decodeUser = json => 
 		Json.Decode.{
 			total: json |> field("total", int),
-			data: json |> field("data", array(decodeStreamer))
+			userData: json |> field("data", array(decodeStreamer))
+		};
+
+	let decodeJSON = json =>
+		Json.Decode.{
+			id: json |> field("id", string),
+			login: json |> field("login", string),
+			display_name: json |> field("display_name", string),
+			account_type: json |> field("type", string),
+			broadcaster_type: json |> field("broadcaster_type", string),
+			description: json |> field("description", string),
+			profile_image_url: json |> field("profile_image_url", string),
+			offline_image_url: json |> field("offline_image_url", string),
+			view_count: json |> field("view_count", int)
+		};
+
+	let decodeData = json =>
+		Json.Decode.{
+			followData: json |> field("data", array(decodeJSON))
 		};
 };
 
@@ -54,12 +92,15 @@ type state = {
 	route: route,
 	loggedIn: bool,
 	credentials: (string, string),
-	followData: userJSON
+	userData: userJSON,
+	followData: array(TypesModule.broadcasterVerbose),
+	mutable tempStr: string
 };
 
 type action = 
 	| ChangeRoute(route)
 	| SetData(userJSON)
+	| SetVerboseData(array(TypesModule.broadcasterVerbose))
 	| FailedToFetch(string);
 
 let component = ReasonReact.reducerComponent("App");
@@ -72,7 +113,9 @@ let make = (_children) => {
 			|> Mapper.toPage,
 		loggedIn: true,
 		credentials: ("", ""),
-		followData: {total: 0, data:[||]}
+		userData: {total: 0, userData:[||]},
+		followData: [||], 
+		tempStr: ""
 	},
 	
 	reducer: (action, state) => {
@@ -80,7 +123,8 @@ let make = (_children) => {
 			| ChangeRoute(route) => 
 					ReasonReact.Router.replace(Mapper.toUrl(route))
 					ReasonReact.Update({...state, route:route})
-			| SetData(data) => ReasonReact.Update({...state, followData: data})
+			| SetData(data) => ReasonReact.Update({...state, userData: data})
+			| SetVerboseData(data) => ReasonReact.Update({...state, followData: data})
 			| FailedToFetch(fetchLocation) => ReasonReact.SideEffects(_self => Js.log("Error, failed to fetch data from " ++ fetchLocation ++ "."))
 		}
 	},
@@ -103,6 +147,30 @@ let make = (_children) => {
 			)
 			|> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API"))))
 			|> ignore
+		)|> Js.Promise.then_(value => {
+			Array.iter((data) => Js.log("jeff"), self.state.userData.userData)
+			Js.Promise.resolve();
+		})
+		/* |> Js.Promise.then_(self => Array.iter((data) => Js.log("jeff"), self.state.userData.userData)); */
+		
+			/* self.state.tempStr = self.state.tempStr ++ "id=" ++ data.to_id,  */
+		/* self.state.userData.userData); */
+		/* Js.log("tempStr: " ++ self.state.tempStr) */
+		Js.Promise.(
+			Fetch.fetchWithInit({"https://api.twitch.tv/helix/users?" ++ self.state.tempStr},
+			Fetch.RequestInit.make(
+				~headers=Fetch.HeadersInit.make({"Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"}),
+				()
+			))
+			|> then_(Fetch.Response.json)
+			|> then_(json =>
+				json 	|> Decode.decodeData
+							|> decodedData => decodedData.followData
+																|> decodedJSON => self.send(SetVerboseData(decodedJSON))
+																|> resolve
+			)
+			/* |> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API")))) */
+			|> ignore
 		)
 	},
 
@@ -118,7 +186,7 @@ let make = (_children) => {
 			(
 				switch (self.state.route, self.state.loggedIn) {
 				| (LogIn, _) => <LogIn />
-				| (Dashboard, true) => <Dashboard data={self.state.followData.data}/>
+				| (Dashboard, true) => <Dashboard data={self.state.followData}/>
 				| (JudgementPage, true) => <JudgementPage />
 				| (_, false) => <LogIn />
 				}

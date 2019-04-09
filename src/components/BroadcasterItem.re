@@ -1,27 +1,16 @@
-type broadcasterVerbose = {
-	id: string,
-	login: string,
-	display_name: string,
-	account_type: string,
-	broadcaster_type: string,
-	description: string,
-	profile_image_url: string,
-	offline_image_url: string,
-	view_count: int,
-	email: string
-};
+open TypesModule
 
 /* State declaration */
-type state = {
-	data: broadcasterVerbose
+/* type state = {
+	data: array(broadcasterVerbose)
 };
 
 /* Action declaration */
 type action =
-	| AssignData(broadcasterVerbose);
-
+	| AssignData(array(broadcasterVerbose))
+	| FailedToFetch(string); */
+/* 
 module Decode = {
-
 	let decodeJSON = json =>
 		Json.Decode.{
 			id: json |> field("id", string),
@@ -33,23 +22,22 @@ module Decode = {
 			profile_image_url: json |> field("profile_image_url", string),
 			offline_image_url: json |> field("offline_image_url", string),
 			view_count: json |> field("view_count", int),
-			email: json |> field("email", string)
 		};
 
 		let decodeData = json =>
 			Json.Decode.{
-				data: json |> field("data", decodeJSON)
+				data: json |> field("data", array(decodeJSON))
 			};
-};
+}; */
 
 
-let component = ReasonReact.reducerComponent("Broadcaster");
+let component = ReasonReact.statelessComponent("Broadcaster");
 
 let make = (~broadcasterObject, _children) => {
 	...component,
 
-	initialState: () => {
-		data: {
+	/* initialState: () => {
+		data: [|{
 			id: "",
 			login: "",
 			display_name: "",
@@ -59,19 +47,19 @@ let make = (~broadcasterObject, _children) => {
 			profile_image_url: "",
 			offline_image_url: "",
 			view_count: 0,
-			email: ""
-		}
-	},
+		}|]
+	}, */
 
 	/* State transitions */
-	reducer: (action, state) =>
+	/* reducer: (action, state) =>
 		switch (action) {
-			|AssignData(dataSent) => ReasonReact.Update({data: dataSent[0]})
-		},
-
+			| AssignData(dataSent) => ReasonReact.Update({data: dataSent})
+			| FailedToFetch(fetchLocation) => ReasonReact.SideEffects(_self => Js.log("Error, failed to fetch data from " ++ fetchLocation ++ "."))
+		}, */
+/* 
 	didMount: self => {
 		Js.Promise.(
-			Fetch.fetchWithInit("https://api.twitch.tv/helix/users?login=" ++ broadcasterObject[0],
+			Fetch.fetchWithInit("https://api.twitch.tv/helix/users?id=" ++ broadcasterObject[1],
 			Fetch.RequestInit.make(
         ~headers=Fetch.HeadersInit.make({"Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"}),
         ()
@@ -79,30 +67,29 @@ let make = (~broadcasterObject, _children) => {
 			|> then_(Fetch.Response.json)
 			|> then_(json =>
 				json 	|> Decode.decodeData
-							|> json => self.send(AssignData(json.data))
-							|> resolve
+							|> decodedData => decodedData.data
+																|> decodedJSON => self.send(AssignData(decodedJSON))
+																|> resolve
 			)
-			/* |> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API")))) */
+			|> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API"))))
 			|> ignore
 		)
-		Js.log(self.state.data)
-	},
+	}, */
 
 	render: self => {
 			<>
-			{self.state.data.id !== "" ? 
-			<div className="card mb-3" style=(ReactDOMRe.Style.make(~background="#660000",()))>
-					<img src={self.state.data.profile_image_url} className="card-img-top" alt="..."></img>
+			{broadcasterObject.id !== "" ? 
+				<div className="card mb-3" style=(ReactDOMRe.Style.make(~background="#660000",()))>
+					<img src={broadcasterObject.profile_image_url} className="card-img-top" alt="..."></img>
 					<div className="card-body">
-						<h5 className="card-title">{ReasonReact.string(broadcasterObject[0])}</h5>
+						<h5 className="card-title">{ReasonReact.string(broadcasterObject.display_name)}</h5>
 						<p className="card-text">{ReasonReact.string("Some quick example text to build on the card title and make up the bulk of the card's content.")}</p>
 						<a href="#" className="btn btn-primary">{ReasonReact.string("Open modal")}</a>
 					</div>
 				</div>
-				/* <p></p><button>{ReasonReact.string("Unfollow")}</button> */
-
+				/* <button>{ReasonReact.string("Unfollow")}</button> */
 			:
-			<div/>
+				<div/>
 			}	
 		</>;
 	}
