@@ -6,7 +6,7 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var BroadcasterItem$ReactTemplate = require("../components/BroadcasterItem.bs.js");
 
-var component = ReasonReact.statelessComponent("Dashboard");
+var component = ReasonReact.statelessComponent("dashboard");
 
 function make(data, _children) {
   return /* record */[
@@ -27,8 +27,9 @@ function make(data, _children) {
                               className: "row"
                             }, match ? $$Array.map((function (streamer) {
                                       return React.createElement("div", {
+                                                  key: streamer[/* id */0],
                                                   className: "col-sm-3"
-                                                }, ReasonReact.element(streamer[/* id */0], undefined, BroadcasterItem$ReactTemplate.make(streamer, /* array */[])));
+                                                }, ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(streamer, /* array */[])));
                                     }), data) : React.createElement("div", undefined)));
             }),
           /* initialState */component[/* initialState */10],

@@ -34,7 +34,6 @@ type streamerJSONVerbose = {
 
 
 module Decode = {
-
 	let decodeStreamer = json =>
 		Json.Decode.{
 			to_name: json |> field("to_name", string),
@@ -123,7 +122,7 @@ let make = (_children) => {
 			| ChangeRoute(route) => 
 					ReasonReact.Router.replace(Mapper.toUrl(route))
 					ReasonReact.Update({...state, route:route})
-			| SetData(data) => ReasonReact.Update({...state, userData: data})
+			| SetData(data) => ReasonReact.UpdateWithSideEffects({...state, userData: data}, self => Js.log(self.state.userData))
 			| SetVerboseData(data) => ReasonReact.Update({...state, followData: data})
 			| FailedToFetch(fetchLocation) => ReasonReact.SideEffects(_self => Js.log("Error, failed to fetch data from " ++ fetchLocation ++ "."))
 		}
@@ -147,17 +146,9 @@ let make = (_children) => {
 			)
 			|> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API"))))
 			|> ignore
-		)|> Js.Promise.then_(value => {
-			Array.iter((data) => Js.log("jeff"), self.state.userData.userData)
-			Js.Promise.resolve();
-		})
-		/* |> Js.Promise.then_(self => Array.iter((data) => Js.log("jeff"), self.state.userData.userData)); */
-		
-			/* self.state.tempStr = self.state.tempStr ++ "id=" ++ data.to_id,  */
-		/* self.state.userData.userData); */
-		/* Js.log("tempStr: " ++ self.state.tempStr) */
+		);
 		Js.Promise.(
-			Fetch.fetchWithInit({"https://api.twitch.tv/helix/users?" ++ self.state.tempStr},
+			Fetch.fetchWithInit({"https://api.twitch.tv/helix/users?" ++ "id=20650414&id=22580017&id=108994872&id=132230344&id=37356443&id=44084034&id=223307755&id=51496027&id26560695&id=44019612&id=102936080&id=75574155&id=54739364&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826"},
 			Fetch.RequestInit.make(
 				~headers=Fetch.HeadersInit.make({"Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"}),
 				()
@@ -166,12 +157,12 @@ let make = (_children) => {
 			|> then_(json =>
 				json 	|> Decode.decodeData
 							|> decodedData => decodedData.followData
-																|> decodedJSON => self.send(SetVerboseData(decodedJSON))
-																|> resolve
+							|> decodedJSON => self.send(SetVerboseData(decodedJSON))
+							|> resolve
 			)
-			/* |> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API")))) */
+			|> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API"))))
 			|> ignore
-		)
+		);
 	},
 
   render: self => {
@@ -194,3 +185,5 @@ let make = (_children) => {
 		</div>;
   }
 };
+
+"&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826"
