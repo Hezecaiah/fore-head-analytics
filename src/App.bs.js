@@ -125,7 +125,7 @@ function make(_children) {
                       })).catch((function (_err) {
                       return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(3, ["Twitch API"])));
                     }));
-              fetch("https://api.twitch.tv/helix/users?id=20650414&id=22580017&id=108994872&id=132230344&id=37356443&id=44084034&id=223307755&id=51496027&id26560695&id=44019612&id=102936080&id=75574155&id=54739364&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826", Fetch.RequestInit[/* make */0](undefined, {
+              fetch("https://api.twitch.tv/helix/users?id=26560695&id=20650414&id=22580017&id=108994872&id=132230344&id=37356443&id=44084034&id=223307755&id=51496027&id26560695&id=44019612&id=102936080&id=75574155&id=54739364&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826", Fetch.RequestInit[/* make */0](undefined, {
                                 "Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"
                               }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0)).then((function (prim) {
                           return prim.json();

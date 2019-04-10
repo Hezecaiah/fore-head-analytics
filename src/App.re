@@ -16,20 +16,8 @@ type userJSON = {
 
 open TypesModule
 
-/* type broadcasterVerbose = {
-	id: string,
-	login: string,
-	display_name: string,
-	account_type: string,
-	broadcaster_type: string,
-	description: string,
-	profile_image_url: string,
-	offline_image_url: string,
-	view_count: int,
-}; */
-
 type streamerJSONVerbose = {
-	followData: array(TypesModule.broadcasterVerbose)
+	followData: array(broadcasterVerbose)
 };
 
 
@@ -112,7 +100,7 @@ let make = (_children) => {
 			|> Mapper.toPage,
 		loggedIn: true,
 		credentials: ("", ""),
-		userData: {total: 0, userData:[||]},
+		userData: { total: 0, userData:[||] },
 		followData: [||], 
 		tempStr: ""
 	},
@@ -148,7 +136,7 @@ let make = (_children) => {
 			|> ignore
 		);
 		Js.Promise.(
-			Fetch.fetchWithInit({"https://api.twitch.tv/helix/users?" ++ "id=20650414&id=22580017&id=108994872&id=132230344&id=37356443&id=44084034&id=223307755&id=51496027&id26560695&id=44019612&id=102936080&id=75574155&id=54739364&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826"},
+			Fetch.fetchWithInit({"https://api.twitch.tv/helix/users?" ++ "id=26560695&id=20650414&id=22580017&id=108994872&id=132230344&id=37356443&id=44084034&id=223307755&id=51496027&id26560695&id=44019612&id=102936080&id=75574155&id=54739364&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826"},
 			Fetch.RequestInit.make(
 				~headers=Fetch.HeadersInit.make({"Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"}),
 				()

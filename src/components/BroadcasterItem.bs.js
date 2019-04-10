@@ -18,26 +18,29 @@ function make(broadcasterObject, _children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              var match = broadcasterObject[/* id */0] !== "";
-              return React.createElement(React.Fragment, undefined, match ? React.createElement("div", {
-                                className: "card mb-3",
-                                style: {
-                                  background: "#660000"
-                                }
-                              }, React.createElement("img", {
-                                    className: "card-img-top",
-                                    alt: "...",
-                                    src: broadcasterObject[/* profile_image_url */6]
-                                  }), React.createElement("div", {
-                                    className: "card-body"
-                                  }, React.createElement("h5", {
-                                        className: "card-title"
-                                      }, broadcasterObject[/* display_name */2]), React.createElement("p", {
-                                        className: "card-text"
-                                      }, "Some quick example text to build on the card title and make up the bulk of the card's content."), React.createElement("a", {
-                                        className: "btn btn-primary",
-                                        href: "#"
-                                      }, "Open modal"))) : React.createElement("div", undefined));
+              return React.createElement(React.Fragment, undefined, React.createElement("div", {
+                              className: "card mb-3",
+                              style: {
+                                background: "#660000"
+                              }
+                            }, React.createElement("img", {
+                                  className: "card-img-top",
+                                  style: {
+                                    height: "150px",
+                                    width: "150px"
+                                  },
+                                  alt: "...",
+                                  src: broadcasterObject[/* profile_image_url */6]
+                                }), React.createElement("div", {
+                                  className: "card-body"
+                                }, React.createElement("h5", {
+                                      className: "card-title"
+                                    }, broadcasterObject[/* display_name */2]), React.createElement("p", {
+                                      className: "card-text"
+                                    }, "Some quick example text to build on the card title and make up the bulk of the card's content."), React.createElement("a", {
+                                      className: "btn btn-primary",
+                                      href: "#"
+                                    }, "Open modal"))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
