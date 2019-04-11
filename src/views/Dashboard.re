@@ -1,15 +1,11 @@
 open TypesModule
 
-/* State declaration */
 type state = {
   currentBroadcaster: broadcasterVerbose
 };
 
-/* Action declaration */
 type action =
-  | ChangeCurrentBroadcaster(broadcasterVerbose); 
-
-
+  | ChangeCurrentBroadcaster(broadcasterVerbose);
 
 let component = ReasonReact.reducerComponent("dashboard")
 
@@ -20,37 +16,31 @@ let make = (~data, _children) => {
   initialState: () => {
     currentBroadcaster: 
       {
-        id: "",
-        login: "",
-        display_name: "",
-        account_type: "",
+        id: "12826",
+        login: "twitch",
+        display_name: "Twitch",
+        account_type: "partner",
         broadcaster_type: "",
-        description: "",
-        profile_image_url: "",
+        description: "Twitch is the world's leading video platform and community for gamers with more than 100 million visitors per month. Our mission is to connect gamers around the world by allowing them to broadcast, watch, and chat from everywhere they play.",
+        profile_image_url: "https://static-cdn.jtvnw.net/jtv_user_pictures/twitch-profile_image-8a8c5be2e3b64a9a-300x300.png",
         offline_image_url: "",
-        view_count: 0,
+        view_count: 225659996,
       }
   },
 
-  reducer: (action, state) =>
+  reducer: (action, _state) =>
     switch (action) {
       | ChangeCurrentBroadcaster(newBroadcaster) => ReasonReact.Update({currentBroadcaster: newBroadcaster});
     },
 
-  didMount: self => {
-    if(Array.length(data) > 0){
-      self.send(ChangeCurrentBroadcaster(data[0]))
-    }
-  },
-
   render: self => {
     <div className="align-content-center">
       <div className="row">
-        <div className="col-2" style=(ReactDOMRe.Style.make(~background="#020202", ~paddingTop="30px",()))>
+        <div className="col-2 d-flex flex-column" style=(ReactDOMRe.Style.make(~background="#020202", ~paddingTop="30px",()))>
           {Array.length(data) > 0 ? 
             ReasonReact.array(Array.map(streamer => {
               (
-                <p key={streamer.id} onClick=((event) => self.send(ChangeCurrentBroadcaster(streamer)))>{ReasonReact.string(streamer.display_name)}</p>
+                <a className="mb-2" key={streamer.id} onClick=((_event) => self.send(ChangeCurrentBroadcaster(streamer)))>{ReasonReact.string(streamer.display_name)}</a>
                 
                 /* <div key={streamer.id} className="col-sm-"> */
                   /* <BroadcasterItem key={streamer.id} broadcasterObject={streamer}/> */
@@ -64,10 +54,7 @@ let make = (~data, _children) => {
         </div>
         <div className="col-9">
           <div className="row">
-            <div className="col-6">
               <BroadcasterItem broadcasterObject={self.state.currentBroadcaster} />
-            </div>
-
 
             /* {Array.length(data) > 0 ? 
               ReasonReact.array(Array.map(streamer => {
@@ -81,7 +68,6 @@ let make = (~data, _children) => {
               :
               <div/>
             } */
-
 
           </div>
         </div>

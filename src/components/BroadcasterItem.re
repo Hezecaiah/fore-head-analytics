@@ -1,57 +1,46 @@
 open TypesModule
 
-/* State declaration */
-/* type state = {
-	data: array(broadcasterVerbose)
+type state = {
+	data: string,
+	advancedStatsShown: bool
 };
 
-/* Action declaration */
 type action =
-	| AssignData(array(broadcasterVerbose))
-	| FailedToFetch(string); */
+	| ShowAnalytics
+	|	FetchUserStatistics(string)
+	| FailedToFetch(string);
 
-let component = ReasonReact.statelessComponent("Broadcaster");
+let component = ReasonReact.reducerComponent("Broadcaster");
 
 let make = (~broadcasterObject, _children) => {
 	...component,
 
-	/* initialState: () => {
-		data: [|{
-			id: "",
-			login: "",
-			display_name: "",
-			account_type: "",
-			broadcaster_type: "",
-			description: "",
-			profile_image_url: "",
-			offline_image_url: "",
-			view_count: 0,
-		}|]
+	initialState: () => {
+		data: "Lol 4Head",
+		advancedStatsShown: false
+	},
+
+	reducer: (action, state) =>
+		switch (action) {
+			| ShowAnalytics	 => ReasonReact.Update({...state, advancedStatsShown: !state.advancedStatsShown})
+			| FetchUserStatistics(data) => ReasonReact.Update({...state, data: data})
+			| FailedToFetch(fetchLocation) => ReasonReact.SideEffects(_self => Js.log("Error, failed to fetch data from " ++ fetchLocation ++ "."))
+		},
+
+	/* didMount: self => {
+		Fetch analytics here when the backend is built
 	}, */
 
-	/* State transitions */
-	/* reducer: (action, state) =>
-		switch (action) {
-			| AssignData(dataSent) => ReasonReact.Update({data: dataSent})
-			| FailedToFetch(fetchLocation) => ReasonReact.SideEffects(_self => Js.log("Error, failed to fetch data from " ++ fetchLocation ++ "."))
-		}, */
-
-
 	render: self => {
-			<>
-			/* {broadcasterObject.id !== "" ?  */
-				<div className="card mb-3" style=(ReactDOMRe.Style.make(~background="#660000",()))>
-					<img src={broadcasterObject.profile_image_url} style=(ReactDOMRe.Style.make(~width="150px", ~height="150px",())) className="card-img-top" alt="..."></img>
-					<div className="card-body">
-						<h5 className="card-title">{ReasonReact.string(broadcasterObject.display_name)}</h5>
-						<p className="card-text">{ReasonReact.string(broadcasterObject.description)}</p>
-						<a href="#" className="btn btn-primary">{ReasonReact.string("Open modal")}</a>
-					</div>
-				</div>
-				/* <button>{ReasonReact.string("Unfollow")}</button> */
-				/* :
-					<div/>
-				}	 */
-		</>;
+		<div className="card m-3" style=(ReactDOMRe.Style.make(~background="#660000",()))>
+			<img src={broadcasterObject.profile_image_url} style=(ReactDOMRe.Style.make(~width="300px", ~height="300px", ~margin="15px", ())) className="card-img-top" alt="..."></img>
+			<div className="card-body">
+				<h5 className="card-title">{ReasonReact.string(broadcasterObject.display_name)}</h5>
+				<p className="card-text">{ReasonReact.string(broadcasterObject.description)}</p>
+				<p className="card-text">{ReasonReact.string("Here's where the basic analytics will be.")}</p>
+				<a href="#" className="btn btn-primary m-3">{ReasonReact.string("Stats for nerds")}</a>
+				<a href="#" className="btn btn-primary m-3">{ReasonReact.string("Unfollow")}</a>
+			</div>
+		</div>
 	}
 };

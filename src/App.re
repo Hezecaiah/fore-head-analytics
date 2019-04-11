@@ -109,7 +109,7 @@ let make = (_children) => {
 			| ChangeRoute(route) => 
 					ReasonReact.Router.replace(Mapper.toUrl(route))
 					ReasonReact.Update({...state, route:route})
-			| SetData(data) => ReasonReact.UpdateWithSideEffects({...state, userData: data}, self => Js.log(self.state.userData))
+			| SetData(data) => ReasonReact.Update({...state, userData: data})
 			| SetVerboseData(data) => ReasonReact.Update({...state, followData: data})
 			| FailedToFetch(fetchLocation) => ReasonReact.SideEffects(_self => Js.log("Error, failed to fetch data from " ++ fetchLocation ++ "."))
 		}
@@ -155,7 +155,7 @@ let make = (_children) => {
   render: self => {
 		<div className="container-fluid">
 			<nav className="nav nav-tabs navbar navbar-expand-lg" style=(ReactDOMRe.Style.make(~background="#660000",()))>
-				<a className="navbar-brand" style=(ReactDOMRe.Style.make(~color="white", ())) href="#">{ReasonReact.string("Navbar")}</a>
+				<a className="navbar-brand" style=(ReactDOMRe.Style.make(~color="white", ~padding="5px", ~border="2px solid #FF6100", ())) href="#">{ReasonReact.string("4Head broe")}</a>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(LogIn))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Log In")}</a></nav>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(Dashboard))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Dashboard")}</a></nav>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(JudgementPage))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Judgement")}</a></nav>
@@ -164,7 +164,7 @@ let make = (_children) => {
 			(
 				switch (self.state.route, self.state.loggedIn) {
 				| (LogIn, _) => <LogIn />
-				| (Dashboard, true) => <Dashboard data={self.state.followData}/>
+				| (Dashboard, true) => <Dashboard data={(self.state.followData)}/>
 				| (JudgementPage, true) => <JudgementPage />
 				| (_, false) => <LogIn />
 				}

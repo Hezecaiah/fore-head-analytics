@@ -168,10 +168,12 @@ function make(_children) {
                             }, React.createElement("a", {
                                   className: "navbar-brand",
                                   style: {
-                                    color: "white"
+                                    border: "2px solid #FF6100",
+                                    color: "white",
+                                    padding: "5px"
                                   },
                                   href: "#"
-                                }, "Navbar"), React.createElement("nav", {
+                                }, "4Head broe"), React.createElement("nav", {
                                   className: "nav-item",
                                   onClick: (function (_event) {
                                       return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
@@ -237,20 +239,14 @@ function make(_children) {
                                 /* tempStr */state[/* tempStr */5]
                               ]]);
                 case 1 : 
-                    return /* UpdateWithSideEffects */Block.__(2, [
-                              /* record */[
+                    return /* Update */Block.__(0, [/* record */[
                                 /* route */state[/* route */0],
                                 /* loggedIn */state[/* loggedIn */1],
                                 /* credentials */state[/* credentials */2],
                                 /* userData */action[0],
                                 /* followData */state[/* followData */4],
                                 /* tempStr */state[/* tempStr */5]
-                              ],
-                              (function (self) {
-                                  console.log(self[/* state */1][/* userData */3]);
-                                  return /* () */0;
-                                })
-                            ]);
+                              ]]);
                 case 2 : 
                     return /* Update */Block.__(0, [/* record */[
                                 /* route */state[/* route */0],
