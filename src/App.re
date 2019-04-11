@@ -20,7 +20,6 @@ type streamerJSONVerbose = {
 	followData: array(broadcasterVerbose)
 };
 
-
 module Decode = {
 	let decodeStreamer = json =>
 		Json.Decode.{
@@ -101,7 +100,7 @@ let make = (_children) => {
 		loggedIn: true,
 		credentials: ("", ""),
 		userData: { total: 0, userData:[||] },
-		followData: [||], 
+		followData: [||],
 		tempStr: ""
 	},
 	

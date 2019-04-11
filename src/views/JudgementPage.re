@@ -9,7 +9,7 @@
 
 	/* Component template declaration.
   	Needs to be **after** state and action declarations! */
-let component = ReasonReact.statelessComponent("Example");
+let component = ReasonReact.statelessComponent("Judgement");
 
 let make = (_children) => {
 	...component,

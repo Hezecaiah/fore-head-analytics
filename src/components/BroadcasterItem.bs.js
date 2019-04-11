@@ -37,7 +37,7 @@ function make(broadcasterObject, _children) {
                                       className: "card-title"
                                     }, broadcasterObject[/* display_name */2]), React.createElement("p", {
                                       className: "card-text"
-                                    }, "Some quick example text to build on the card title and make up the bulk of the card's content."), React.createElement("a", {
+                                    }, broadcasterObject[/* description */5]), React.createElement("a", {
                                       className: "btn btn-primary",
                                       href: "#"
                                     }, "Open modal"))));
