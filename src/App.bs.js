@@ -149,13 +149,56 @@ function make(_children) {
               var tmp;
               switch (match) {
                 case 0 : 
-                    tmp = ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
+                    tmp = React.createElement("div", {
+                          className: "d-flex justify-content-center"
+                        }, React.createElement("div", {
+                              className: "card d-flex flex-column justify-content-center",
+                              style: {
+                                background: "#660000",
+                                marginTop: "50px",
+                                padding: "15px"
+                              }
+                            }, React.createElement("h1", undefined, "Log in with your Twitch credentials."), React.createElement("form", undefined, React.createElement("div", {
+                                      className: "form-group"
+                                    }, React.createElement("label", {
+                                          htmlFor: "username"
+                                        }, "Twitch Username: "), React.createElement("input", {
+                                          className: "form-control",
+                                          id: "username",
+                                          placeholder: "Username"
+                                        })), React.createElement("div", {
+                                      className: "form-group"
+                                    }, React.createElement("label", {
+                                          htmlFor: "password"
+                                        }, "Twitch Password: "), React.createElement("input", {
+                                          className: "form-control",
+                                          id: "password",
+                                          placeholder: "Password",
+                                          type: "password"
+                                        })), React.createElement("a", {
+                                      className: "nav-link",
+                                      style: {
+                                        color: "white"
+                                      },
+                                      href: "dashboard",
+                                      onClick: (function (_event) {
+                                          return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* Dashboard */1]));
+                                        })
+                                    }, React.createElement("button", {
+                                          className: "btn btn-primary align-self-center",
+                                          style: {
+                                            background: "#FF6100",
+                                            borderColor: "#FF7D2E",
+                                            borderRadius: "0"
+                                          },
+                                          type: "submit"
+                                        }, "Log in")))));
                     break;
                 case 1 : 
                     tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */4], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
-                    tmp = match$1 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(/* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
+                    tmp = match$1 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(self[/* state */1][/* followData */4], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 
               }
@@ -179,18 +222,7 @@ function make(_children) {
                                     padding: "5px"
                                   },
                                   href: "#"
-                                }, "4Head broe"), React.createElement("nav", {
-                                  className: "nav-item",
-                                  onClick: (function (_event) {
-                                      return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
-                                    })
-                                }, React.createElement("a", {
-                                      className: "nav-link",
-                                      style: {
-                                        color: "white"
-                                      },
-                                      href: "#"
-                                    }, "Log In")), React.createElement("nav", {
+                                }, "4Head"), React.createElement("nav", {
                                   className: "nav-item",
                                   onClick: (function (_event) {
                                       return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* Dashboard */1]));
@@ -212,7 +244,19 @@ function make(_children) {
                                         color: "white"
                                       },
                                       href: "#"
-                                    }, "Judgement"))), tmp);
+                                    }, "Judgement")), React.createElement("nav", {
+                                  className: "nav-item",
+                                  onClick: (function (_event) {
+                                      return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
+                                    })
+                                }, React.createElement("a", {
+                                      className: "nav-link",
+                                      style: {
+                                        color: "white",
+                                        marginLeft: "65vw"
+                                      },
+                                      href: "#"
+                                    }, "Log In"))), tmp);
             }),
           /* initialState */(function (param) {
               return /* record */[

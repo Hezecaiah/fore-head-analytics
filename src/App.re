@@ -156,17 +156,32 @@ let make = (_children) => {
   render: self => {
 		<div className="container-fluid" style=(ReactDOMRe.Style.make(~margin="0", ~paddingRight="0", ~paddingLeft="0",()))>
 			<nav className="nav nav-tabs navbar navbar-expand-lg" style=(ReactDOMRe.Style.make(~background="#660000",()))>
-				<a className="navbar-brand" style=(ReactDOMRe.Style.make(~color="white", ~padding="5px", ~border="2px solid #FF6100", ())) href="#">{ReasonReact.string("4Head broe")}</a>
-				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(LogIn))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Log In")}</a></nav>
+				<a className="navbar-brand" style=(ReactDOMRe.Style.make(~color="white", ~padding="5px", ~border="2px solid #FF6100", ())) href="#">{ReasonReact.string("4Head")}</a>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(Dashboard))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Dashboard")}</a></nav>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(JudgementPage))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Judgement")}</a></nav>
+				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(LogIn))}><a style=(ReactDOMRe.Style.make(~color="white", ~marginLeft="65vw", ())) className="nav-link" href="#">{ReasonReact.string("Log In")}</a></nav>
 			</nav>
 			/* <div id="twitch-embed"></div> */
 			(
 				switch (self.state.route, self.state.loggedIn) {
-				| (LogIn, _) => <LogIn/>
+				| (LogIn, _) => <div className="d-flex justify-content-center">
+													<div style=(ReactDOMRe.Style.make(~background="#660000", ~marginTop="50px",~padding="15px", ())) className="card d-flex flex-column justify-content-center">
+														<h1>{ReasonReact.string("Log in with your Twitch credentials.")}</h1>
+														<form>
+															<div className="form-group">
+																<label htmlFor="username">{ReasonReact.string("Twitch Username: ")}</label>
+																<input className="form-control" placeholder="Username" id="username"></input>
+															</div>
+															<div className="form-group">
+																<label htmlFor="password">{ReasonReact.string("Twitch Password: ")}</label>
+																<input className="form-control" type_="password" placeholder="Password" id="password"></input>
+															</div>
+															<a style=(ReactDOMRe.Style.make(~color="white", ())) onClick={_event =>  self.send(ChangeRoute(Dashboard))} className="nav-link" href="dashboard"><button className="btn btn-primary align-self-center" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ())) type_="submit">{ReasonReact.string("Log in")}</button></a>
+														</form>
+													</div>
+												</div>;
 				| (Dashboard, true) => <Dashboard data={(self.state.followData)}/>
-				| (JudgementPage, true) => <JudgementPage />
+				| (JudgementPage, true) => <JudgementPage data={(self.state.followData)}/>
 				| (_, false) => <LogIn />
 				}
 			)

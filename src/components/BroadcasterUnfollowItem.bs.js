@@ -5,9 +5,9 @@ var Block = require("bs-platform/lib/js/block.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
-var component = ReasonReact.reducerComponent("Broadcaster");
+var component = ReasonReact.reducerComponent("BroadcasterJudgement");
 
-function make(broadcasterObject, engagement, coldOpen, _children) {
+function make(broadcasterObject, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -19,47 +19,52 @@ function make(broadcasterObject, engagement, coldOpen, _children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              return React.createElement(React.Fragment, undefined, React.createElement("div", {
-                              className: "card m-3",
-                              style: {
-                                background: "#660000"
-                              }
+              return React.createElement("div", {
+                          className: "card m-3",
+                          style: {
+                            background: "#660000",
+                            width: "25vw"
+                          }
+                        }, React.createElement("div", {
+                              className: "d-flex flex-row"
                             }, React.createElement("img", {
                                   className: "card-img-top",
                                   style: {
-                                    height: "300px",
+                                    border: "3px solid #020202",
+                                    height: "100px",
                                     margin: "15px",
-                                    width: "300px"
+                                    width: "100px"
                                   },
                                   alt: "...",
                                   src: broadcasterObject[/* profile_image_url */6]
-                                }), React.createElement("div", {
-                                  className: "card-body"
-                                }, React.createElement("h5", {
-                                      className: "card-title"
-                                    }, broadcasterObject[/* display_name */2]), React.createElement("p", {
-                                      className: "card-text"
-                                    }, broadcasterObject[/* description */5]), React.createElement("p", {
-                                      className: "card-text"
-                                    }, "Engagement: " + engagement), React.createElement("p", {
-                                      className: "card-text"
-                                    }, "Percentage of cold opens: " + coldOpen), React.createElement("a", {
-                                      className: "btn btn-primary m-3",
-                                      style: {
-                                        background: "#FF6100",
-                                        borderColor: "#FF7D2E",
-                                        borderRadius: "0"
-                                      },
-                                      href: "#"
-                                    }, "Stats for nerds"), React.createElement("a", {
-                                      className: "btn btn-primary m-3",
-                                      style: {
-                                        background: "#FF6100",
-                                        borderColor: "#FF7D2E",
-                                        borderRadius: "0"
-                                      },
-                                      href: "#"
-                                    }, "Unfollow"))));
+                                }), React.createElement("h5", {
+                                  className: "card-title",
+                                  style: {
+                                    margin: "40px"
+                                  }
+                                }, broadcasterObject[/* display_name */2])), React.createElement("div", {
+                              className: "card-body d-flex flex-column justify-content-center"
+                            }, React.createElement("p", {
+                                  className: "card-text"
+                                }, "Engagement: 23.12%"), React.createElement("p", {
+                                  className: "card-text"
+                                }, "Percentage of cold opens: 74.21%"), React.createElement("a", {
+                                  className: "btn btn-primary m-3 align-self-end",
+                                  style: {
+                                    background: "#FF6100",
+                                    borderColor: "#FF7D2E",
+                                    borderRadius: "0"
+                                  },
+                                  href: "#"
+                                }, "Stats for nerds"), React.createElement("a", {
+                                  className: "btn btn-primary m-3 align-self-end",
+                                  style: {
+                                    background: "#FF6100",
+                                    borderColor: "#FF7D2E",
+                                    borderRadius: "0"
+                                  },
+                                  href: "#"
+                                }, "Unfollow")));
             }),
           /* initialState */(function (param) {
               return /* record */[

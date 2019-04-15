@@ -32,12 +32,12 @@ function make(data, _children) {
                                   style: {
                                     background: "#020202",
                                     border: "5px solid #660000",
-                                    marginLeft: "15px",
-                                    paddingTop: "30px"
+                                    margin: "30px",
+                                    marginTop: "15px"
                                   }
                                 }, React.createElement("h3", {
                                       style: {
-                                        marginTop: "-15px"
+                                        paddingTop: "10px"
                                       }
                                     }, React.createElement("u", undefined, "Streamers")), match ? $$Array.map((function (streamer) {
                                           return React.createElement("a", {
@@ -51,7 +51,7 @@ function make(data, _children) {
                                   className: "col-9"
                                 }, React.createElement("div", {
                                       className: "row"
-                                    }, ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(self[/* state */1][/* currentBroadcaster */0], /* array */[]))))));
+                                    }, ReasonReact.element(undefined, undefined, BroadcasterItem$ReactTemplate.make(self[/* state */1][/* currentBroadcaster */0], "83.32%", "32.23%", /* array */[]))))));
             }),
           /* initialState */(function (param) {
               return /* record */[/* currentBroadcaster : record */[
