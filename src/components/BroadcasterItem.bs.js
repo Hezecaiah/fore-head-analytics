@@ -22,7 +22,8 @@ function make(broadcasterObject, engagement, coldOpen, _children) {
               return React.createElement(React.Fragment, undefined, React.createElement("div", {
                               className: "card m-3",
                               style: {
-                                background: "#660000"
+                                background: "#660000",
+                                width: "100%"
                               }
                             }, React.createElement("img", {
                                   className: "card-img-top",
@@ -39,11 +40,19 @@ function make(broadcasterObject, engagement, coldOpen, _children) {
                                       className: "card-title"
                                     }, broadcasterObject[/* display_name */2]), React.createElement("p", {
                                       className: "card-text"
-                                    }, broadcasterObject[/* description */5]), React.createElement("p", {
-                                      className: "card-text"
-                                    }, "Engagement: " + engagement), React.createElement("p", {
-                                      className: "card-text"
-                                    }, "Percentage of cold opens: " + coldOpen), React.createElement("a", {
+                                    }, broadcasterObject[/* description */5]), React.createElement("table", {
+                                      className: "table table-dark table-striped"
+                                    }, React.createElement("thead", undefined, React.createElement("tr", undefined, React.createElement("th", {
+                                                  scope: "col"
+                                                }, "Engagement "), React.createElement("th", {
+                                                  scope: "col"
+                                                }, "Total time watching"), React.createElement("th", {
+                                                  scope: "col"
+                                                }, "Time in focus"), React.createElement("th", {
+                                                  scope: "col"
+                                                }, "Cold open percentage"))), React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("th", {
+                                                  scope: "row"
+                                                }, engagement), React.createElement("td", undefined, "4 hours, 32 minutes"), React.createElement("td", undefined, "2 hours, 23 minute (50%)"), React.createElement("td", undefined, "24.23%")))), React.createElement("a", {
                                       className: "btn btn-primary m-3",
                                       style: {
                                         background: "#FF6100",

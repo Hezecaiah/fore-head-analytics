@@ -35,18 +35,34 @@ function make(data, _children) {
                                     margin: "30px",
                                     marginTop: "15px"
                                   }
-                                }, React.createElement("h3", {
+                                }, React.createElement("h4", {
                                       style: {
                                         paddingTop: "10px"
                                       }
                                     }, React.createElement("u", undefined, "Streamers")), match ? $$Array.map((function (streamer) {
                                           return React.createElement("a", {
                                                       key: streamer[/* id */0],
-                                                      className: "mb-2",
+                                                      className: "btn text-left mb-2",
+                                                      style: {
+                                                        background: "#19171C",
+                                                        color: "white",
+                                                        padding: "5px",
+                                                        paddingLeft: "10px",
+                                                        borderRadius: "0"
+                                                      },
+                                                      href: "#",
                                                       onClick: (function (_event) {
                                                           return Curry._1(self[/* send */3], /* ChangeCurrentBroadcaster */[streamer]);
                                                         })
-                                                    }, streamer[/* display_name */2]);
+                                                    }, React.createElement("img", {
+                                                          style: {
+                                                            height: "30px",
+                                                            marginRight: "10px",
+                                                            width: "30px"
+                                                          },
+                                                          alt: "...",
+                                                          src: streamer[/* profile_image_url */6]
+                                                        }), streamer[/* display_name */2]);
                                         }), data) : React.createElement("div", undefined), React.createElement("p", undefined, "More...")), React.createElement("div", {
                                   className: "col-9"
                                 }, React.createElement("div", {

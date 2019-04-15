@@ -37,15 +37,14 @@ let make = (~data, _children) => {
     <div className="align-content-center">
       <div className="row">
         <div className="col-2 d-flex flex-column" style=(ReactDOMRe.Style.make(~background="#020202", ~margin="30px", ~marginTop="15px", ~border="5px solid #660000", ()))>
-          <h3 style=(ReactDOMRe.Style.make(~paddingTop="10px", ()))><u>{ReasonReact.string("Streamers")}</u></h3>
+          <h4 style=(ReactDOMRe.Style.make(~paddingTop="10px", ()))><u>{ReasonReact.string("Streamers")}</u></h4>
           {Array.length(data) > 0 ? 
             ReasonReact.array(Array.map(streamer => {
               (
-                <a className="mb-2" key={streamer.id} onClick=((_event) => self.send(ChangeCurrentBroadcaster(streamer)))>{ReasonReact.string(streamer.display_name)}</a>
-                
-                /* <div key={streamer.id} className="col-sm-"> */
-                  /* <BroadcasterItem key={streamer.id} broadcasterObject={streamer}/> */
-                /* </div> */
+                <a href="#" style=(ReactDOMRe.Style.make(~background="#19171C", ~color="white", ~borderRadius="0", ~padding="5px", ~paddingLeft="10px", ())) className="btn text-left mb-2" key={streamer.id} onClick=((_event) => self.send(ChangeCurrentBroadcaster(streamer)))>
+                  <img src={streamer.profile_image_url} style=(ReactDOMRe.Style.make(~width="30px", ~height="30px", ~marginRight="10px", ())) alt="..."></img>
+                  {ReasonReact.string(streamer.display_name)}
+                </a>
               )
             }, data))
             :
@@ -56,34 +55,8 @@ let make = (~data, _children) => {
         <div className="col-9">
           <div className="row">
               <BroadcasterItem broadcasterObject={self.state.currentBroadcaster} engagement={"83.32%"} coldOpen={"32.23%"}/>
-
-            /* {Array.length(data) > 0 ? 
-              ReasonReact.array(Array.map(streamer => {
-                (
-                  /* <p key={streamer.id}>{ReasonReact.string(streamer.display_name)}</p> */
-                  <div key={streamer.id} className="col-sm-4">
-                    <BroadcasterItem key={streamer.id} broadcasterObject={streamer}/>
-                  </div>
-                )
-              }, data))
-              :
-              <div/>
-            } */
-
           </div>
         </div>
-
-
-        /* <script src="https://embed.twitch.tv/embed/v1.js"></script>
-        <script type_="text/javascript">
-          new Twitch.Embed("twitch-embed", {
-            width: 854,
-            height: 480,
-            channel: "monstercat"
-          });
-        </script> */
-
-
       </div>
     </div>;
   }

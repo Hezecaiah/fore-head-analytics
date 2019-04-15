@@ -27,7 +27,7 @@ function make(_children) {
                                 marginTop: "50px",
                                 padding: "15px"
                               }
-                            }, React.createElement("h1", undefined, "Log in with your Twitch credentials."), React.createElement("form", undefined, React.createElement("div", {
+                            }, React.createElement("h1", undefined, "Log In"), React.createElement("form", undefined, React.createElement("div", {
                                       className: "form-group"
                                     }, React.createElement("label", {
                                           htmlFor: "username"

@@ -6,7 +6,7 @@ let make = (_children) => {
   render: _self => {
 		<div className="d-flex justify-content-center">
 			<div style=(ReactDOMRe.Style.make(~background="#660000", ~marginTop="50px",~padding="15px", ())) className="card d-flex flex-column justify-content-center">
-				<h1>{ReasonReact.string("Log in with your Twitch credentials.")}</h1>
+				<h1>{ReasonReact.string("Log In")}</h1>
 				<form>
 					<div className="form-group">
 						<label htmlFor="username">{ReasonReact.string("Twitch Username: ")}</label>

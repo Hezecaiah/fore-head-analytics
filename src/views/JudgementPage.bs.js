@@ -27,11 +27,9 @@ function make(data, _children) {
               return React.createElement("div", {
                           className: "d-flex justify-content-center"
                         }, match ? $$Array.map((function (broadcasterObject) {
-                                  return React.createElement("div", {
-                                              onClick: (function (_event) {
-                                                  return Curry._1(self[/* send */3], /* RemoveBroadcaster */0);
-                                                })
-                                            }, ReasonReact.element(undefined, undefined, BroadcasterUnfollowItem$ReactTemplate.make(broadcasterObject, /* array */[])));
+                                  return ReasonReact.element(undefined, undefined, BroadcasterUnfollowItem$ReactTemplate.make((function (_event) {
+                                                    return Curry._1(self[/* send */3], /* RemoveBroadcaster */[1]);
+                                                  }), broadcasterObject, /* array */[]));
                                 }), self[/* state */1][/* list */0]) : React.createElement("div", undefined));
             }),
           /* initialState */(function (param) {

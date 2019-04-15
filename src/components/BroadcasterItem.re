@@ -33,36 +33,33 @@ let make = (~broadcasterObject, ~engagement, ~coldOpen, _children) => {
 
 	render: self => {
 		<>
-			<div className="card m-3" style=(ReactDOMRe.Style.make(~background="#660000",()))>
+			<div className="card m-3" style=(ReactDOMRe.Style.make(~background="#660000", ~width="100%", ()))>
 				<img src={broadcasterObject.profile_image_url} style=(ReactDOMRe.Style.make(~width="300px", ~height="300px", ~margin="15px", ())) className="card-img-top" alt="..."></img>
 				<div className="card-body">
 					<h5 className="card-title">{ReasonReact.string(broadcasterObject.display_name)}</h5>
 					<p className="card-text">{ReasonReact.string(broadcasterObject.description)}</p>
-					<p className="card-text">{ReasonReact.string("Engagement: " ++ engagement)}</p>
-					<p className="card-text">{ReasonReact.string("Percentage of cold opens: " ++ coldOpen)}</p>
+					<table className="table table-dark table-striped">
+						<thead>
+							<tr>
+								<th scope="col">{ReasonReact.string("Engagement ")}</th>
+								<th scope="col">{ReasonReact.string("Total time watching")}</th>
+								<th scope="col">{ReasonReact.string("Time in focus")}</th>
+								<th scope="col">{ReasonReact.string("Cold open percentage")}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">{ReasonReact.string(engagement)}</th>
+								<td>{ReasonReact.string("4 hours, 32 minutes")}</td>
+								<td>{ReasonReact.string("2 hours, 23 minute (50%)")}</td>
+								<td>{ReasonReact.string("24.23%")}</td>
+							</tr>
+						</tbody>
+					</table>
 					<a href="#" className="btn btn-primary m-3" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ()))>{ReasonReact.string("Stats for nerds")}</a>
 					<a href="#" className="btn btn-primary m-3" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ()))>{ReasonReact.string("Unfollow")}</a>
 				</div>
 			</div>
-			/* <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" ariaLabel="exampleModalLabel" ariaHidden=true>
-				<div className="modal-dialog" role="document">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title" id="exampleModalLabel">{ReasonReact.string("Modal title")}</h5>
-							<button type_="button" className="close" dataDismiss="modal" ariaLabel="Close">
-								<span ariaHidden=true>{ReasonReact.string("haha")}</span>
-							</button>
-						</div>
-						<div className="modal-body">
-							{ReasonReact.string("lol")}
-						</div>
-						<div className="modal-footer">
-							<button type_="button" className="btn btn-secondary" dataDismiss="modal">{ReasonReact.string("Close")}</button>
-							<button type_="button" className="btn btn-primary">{ReasonReact.string("Save changes")}</button>
-						</div>
-					</div>
-				</div>
-			</div> */
 		</>;
 	}
 };

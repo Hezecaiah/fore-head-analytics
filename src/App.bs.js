@@ -144,10 +144,11 @@ function make(_children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              var match = self[/* state */1][/* route */0];
-              var match$1 = self[/* state */1][/* loggedIn */1];
+              var match = self[/* state */1][/* route */0] === /* LogIn */0;
+              var match$1 = self[/* state */1][/* route */0];
+              var match$2 = self[/* state */1][/* loggedIn */1];
               var tmp;
-              switch (match) {
+              switch (match$1) {
                 case 0 : 
                     tmp = React.createElement("div", {
                           className: "d-flex justify-content-center"
@@ -158,13 +159,18 @@ function make(_children) {
                                 marginTop: "50px",
                                 padding: "15px"
                               }
-                            }, React.createElement("h1", undefined, "Log in with your Twitch credentials."), React.createElement("form", undefined, React.createElement("div", {
+                            }, React.createElement("h1", {
+                                  className: "text-center"
+                                }, "Log In"), React.createElement("form", undefined, React.createElement("div", {
                                       className: "form-group"
                                     }, React.createElement("label", {
                                           htmlFor: "username"
                                         }, "Twitch Username: "), React.createElement("input", {
                                           className: "form-control",
                                           id: "username",
+                                          style: {
+                                            borderRadius: "0"
+                                          },
                                           placeholder: "Username"
                                         })), React.createElement("div", {
                                       className: "form-group"
@@ -173,6 +179,9 @@ function make(_children) {
                                         }, "Twitch Password: "), React.createElement("input", {
                                           className: "form-control",
                                           id: "password",
+                                          style: {
+                                            borderRadius: "0"
+                                          },
                                           placeholder: "Password",
                                           type: "password"
                                         })), React.createElement("a", {
@@ -195,10 +204,10 @@ function make(_children) {
                                         }, "Log in")))));
                     break;
                 case 1 : 
-                    tmp = match$1 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */4], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
+                    tmp = match$2 ? ReasonReact.element(undefined, undefined, Dashboard$ReactTemplate.make(self[/* state */1][/* followData */4], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 case 2 : 
-                    tmp = match$1 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(self[/* state */1][/* followData */4], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
+                    tmp = match$2 ? ReasonReact.element(undefined, undefined, JudgementPage$ReactTemplate.make(self[/* state */1][/* followData */4], /* array */[])) : ReasonReact.element(undefined, undefined, LogIn$ReactTemplate.make(/* array */[]));
                     break;
                 
               }
@@ -244,19 +253,19 @@ function make(_children) {
                                         color: "white"
                                       },
                                       href: "#"
-                                    }, "Judgement")), React.createElement("nav", {
-                                  className: "nav-item",
-                                  onClick: (function (_event) {
-                                      return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
-                                    })
-                                }, React.createElement("a", {
-                                      className: "nav-link",
-                                      style: {
-                                        color: "white",
-                                        marginLeft: "65vw"
-                                      },
-                                      href: "#"
-                                    }, "Log In"))), tmp);
+                                    }, "Judgement")), match ? React.createElement("div", undefined) : React.createElement("nav", {
+                                    className: "nav-item",
+                                    onClick: (function (_event) {
+                                        return Curry._1(self[/* send */3], /* ChangeRoute */Block.__(0, [/* LogIn */0]));
+                                      })
+                                  }, React.createElement("a", {
+                                        className: "nav-link",
+                                        style: {
+                                          color: "white",
+                                          marginLeft: "65vw"
+                                        },
+                                        href: "#"
+                                      }, "Profile"))), tmp);
             }),
           /* initialState */(function (param) {
               return /* record */[

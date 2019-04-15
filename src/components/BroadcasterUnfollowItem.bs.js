@@ -7,7 +7,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.reducerComponent("BroadcasterJudgement");
 
-function make(broadcasterObject, _children) {
+function make(onClick, broadcasterObject, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -44,11 +44,19 @@ function make(broadcasterObject, _children) {
                                   }
                                 }, broadcasterObject[/* display_name */2])), React.createElement("div", {
                               className: "card-body d-flex flex-column justify-content-center"
-                            }, React.createElement("p", {
-                                  className: "card-text"
-                                }, "Engagement: 23.12%"), React.createElement("p", {
-                                  className: "card-text"
-                                }, "Percentage of cold opens: 74.21%"), React.createElement("a", {
+                            }, React.createElement("table", {
+                                  className: "table table-dark table-striped"
+                                }, React.createElement("thead", undefined, React.createElement("tr", undefined, React.createElement("th", {
+                                              scope: "col"
+                                            }, "Engagement "), React.createElement("th", {
+                                              scope: "col"
+                                            }, "Total time watching"))), React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("th", {
+                                              scope: "row"
+                                            }, "lol"), React.createElement("td", undefined, "4 hours, 32 minutes"))), React.createElement("thead", undefined, React.createElement("tr", undefined, React.createElement("th", {
+                                              scope: "col"
+                                            }, "Time in focus"), React.createElement("th", {
+                                              scope: "col"
+                                            }, "Cold open percentage"))), React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", undefined, "2 hours, 23 minute (50%)"), React.createElement("td", undefined, "24.23%")))), React.createElement("a", {
                                   className: "btn btn-primary m-3 align-self-end",
                                   style: {
                                     background: "#FF6100",
@@ -63,7 +71,8 @@ function make(broadcasterObject, _children) {
                                     borderColor: "#FF7D2E",
                                     borderRadius: "0"
                                   },
-                                  href: "#"
+                                  href: "#",
+                                  onClick: onClick
                                 }, "Unfollow")));
             }),
           /* initialState */(function (param) {

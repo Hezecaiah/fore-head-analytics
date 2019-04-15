@@ -12,7 +12,7 @@ type action =
 
 let component = ReasonReact.reducerComponent("BroadcasterJudgement");
 
-let make = (~broadcasterObject, _children) => {
+let make = (~onClick, ~broadcasterObject, _children) => {
 	...component,
 
 	initialState: () => {
@@ -38,11 +38,34 @@ let make = (~broadcasterObject, _children) => {
 				<h5 className="card-title" style=(ReactDOMRe.Style.make(~margin="40px", ()))>{ReasonReact.string(broadcasterObject.display_name)}</h5>
 			</div>
 			<div className="card-body d-flex flex-column justify-content-center">
-				/* <p className="card-text">{ReasonReact.string(broadcasterObject.description)}</p> */
-				<p className="card-text">{ReasonReact.string("Engagement: 23.12%")}</p>
-				<p className="card-text">{ReasonReact.string("Percentage of cold opens: 74.21%")}</p>
+				<table className="table table-dark table-striped">
+					<thead>
+						<tr>
+							<th scope="col">{ReasonReact.string("Engagement ")}</th>
+							<th scope="col">{ReasonReact.string("Total time watching")}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">{ReasonReact.string("lol")}</th>
+							<td>{ReasonReact.string("4 hours, 32 minutes")}</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th scope="col">{ReasonReact.string("Time in focus")}</th>
+							<th scope="col">{ReasonReact.string("Cold open percentage")}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{ReasonReact.string("2 hours, 23 minute (50%)")}</td>
+							<td>{ReasonReact.string("24.23%")}</td>
+						</tr>
+					</tbody>
+				</table>
 				<a href="#" className="btn btn-primary m-3 align-self-end" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ()))>{ReasonReact.string("Stats for nerds")}</a>
-				<a href="#" className="btn btn-primary m-3 align-self-end" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ()))>{ReasonReact.string("Unfollow")}</a>
+				<a href="#" onClick={onClick} className="btn btn-primary m-3 align-self-end" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ()))>{ReasonReact.string("Unfollow")}</a>
 			</div>
 		</div>
 	}
