@@ -31,9 +31,15 @@ function make(data, _children) {
                                   className: "col-2 d-flex flex-column",
                                   style: {
                                     background: "#020202",
+                                    border: "5px solid #660000",
+                                    marginLeft: "15px",
                                     paddingTop: "30px"
                                   }
-                                }, match ? $$Array.map((function (streamer) {
+                                }, React.createElement("h3", {
+                                      style: {
+                                        marginTop: "-15px"
+                                      }
+                                    }, React.createElement("u", undefined, "Streamers")), match ? $$Array.map((function (streamer) {
                                           return React.createElement("a", {
                                                       key: streamer[/* id */0],
                                                       className: "mb-2",

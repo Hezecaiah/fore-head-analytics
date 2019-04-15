@@ -8,6 +8,7 @@ var React = require("react");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var LogIn$ReactTemplate = require("./views/LogIn.bs.js");
+var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
 var Dashboard$ReactTemplate = require("./views/Dashboard.bs.js");
 var JudgementPage$ReactTemplate = require("./views/JudgementPage.bs.js");
 
@@ -121,9 +122,9 @@ function make(_children) {
                           return prim.json();
                         })).then((function (json) {
                         var decodedJSON = decodeUser(json);
-                        return Promise.resolve(Curry._1(self[/* send */3], /* SetData */Block.__(1, [decodedJSON])));
+                        return Promise.resolve(Curry._1(self[/* send */3], /* SetData */Block.__(2, [decodedJSON])));
                       })).catch((function (_err) {
-                      return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(3, ["Twitch API"])));
+                      return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(4, ["Twitch API"])));
                     }));
               fetch("https://api.twitch.tv/helix/users?id=26560695&id=20650414&id=22580017&id=108994872&id=132230344&id=37356443&id=44084034&id=223307755&id=51496027&id26560695&id=44019612&id=102936080&id=75574155&id=54739364&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826", Fetch.RequestInit[/* make */0](undefined, {
                                 "Client-ID": "re6wrq92zpvgqndlc8mokgr97j09l9"
@@ -132,9 +133,9 @@ function make(_children) {
                         })).then((function (json) {
                         var decodedData = decodeData(json);
                         var decodedJSON = decodedData[/* followData */0];
-                        return Promise.resolve(Curry._1(self[/* send */3], /* SetVerboseData */Block.__(2, [decodedJSON])));
+                        return Promise.resolve(Curry._1(self[/* send */3], /* SetVerboseData */Block.__(3, [decodedJSON])));
                       })).catch((function (_err) {
-                      return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(3, ["Twitch API"])));
+                      return Promise.resolve(Curry._1(self[/* send */3], /* FailedToFetch */Block.__(4, ["Twitch API"])));
                     }));
               return /* () */0;
             }),
@@ -159,7 +160,12 @@ function make(_children) {
                 
               }
               return React.createElement("div", {
-                          className: "container-fluid"
+                          className: "container-fluid",
+                          style: {
+                            margin: "0",
+                            paddingRight: "0",
+                            paddingLeft: "0"
+                          }
                         }, React.createElement("nav", {
                               className: "nav nav-tabs navbar navbar-expand-lg",
                               style: {
@@ -239,6 +245,15 @@ function make(_children) {
                                 /* tempStr */state[/* tempStr */5]
                               ]]);
                 case 1 : 
+                    throw [
+                          Caml_builtin_exceptions.match_failure,
+                          /* tuple */[
+                            "App.re",
+                            108,
+                            29
+                          ]
+                        ];
+                case 2 : 
                     return /* Update */Block.__(0, [/* record */[
                                 /* route */state[/* route */0],
                                 /* loggedIn */state[/* loggedIn */1],
@@ -247,7 +262,7 @@ function make(_children) {
                                 /* followData */state[/* followData */4],
                                 /* tempStr */state[/* tempStr */5]
                               ]]);
-                case 2 : 
+                case 3 : 
                     return /* Update */Block.__(0, [/* record */[
                                 /* route */state[/* route */0],
                                 /* loggedIn */state[/* loggedIn */1],
@@ -256,7 +271,7 @@ function make(_children) {
                                 /* followData */action[0],
                                 /* tempStr */state[/* tempStr */5]
                               ]]);
-                case 3 : 
+                case 4 : 
                     var fetchLocation = action[0];
                     return /* SideEffects */Block.__(1, [(function (_self) {
                                   console.log("Error, failed to fetch data from " + (fetchLocation + "."));

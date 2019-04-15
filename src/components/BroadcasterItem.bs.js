@@ -43,9 +43,19 @@ function make(broadcasterObject, _children) {
                                   className: "card-text"
                                 }, "Here's where the basic analytics will be."), React.createElement("a", {
                                   className: "btn btn-primary m-3",
+                                  style: {
+                                    background: "#FF6100",
+                                    borderColor: "#FF7D2E",
+                                    borderRadius: "0"
+                                  },
                                   href: "#"
                                 }, "Stats for nerds"), React.createElement("a", {
                                   className: "btn btn-primary m-3",
+                                  style: {
+                                    background: "#FF6100",
+                                    borderColor: "#FF7D2E",
+                                    borderRadius: "0"
+                                  },
                                   href: "#"
                                 }, "Unfollow")));
             }),

@@ -38,8 +38,8 @@ let make = (~broadcasterObject, _children) => {
 				<h5 className="card-title">{ReasonReact.string(broadcasterObject.display_name)}</h5>
 				<p className="card-text">{ReasonReact.string(broadcasterObject.description)}</p>
 				<p className="card-text">{ReasonReact.string("Here's where the basic analytics will be.")}</p>
-				<a href="#" className="btn btn-primary m-3">{ReasonReact.string("Stats for nerds")}</a>
-				<a href="#" className="btn btn-primary m-3">{ReasonReact.string("Unfollow")}</a>
+				<a href="#" className="btn btn-primary m-3" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ()))>{ReasonReact.string("Stats for nerds")}</a>
+				<a href="#" className="btn btn-primary m-3" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ()))>{ReasonReact.string("Unfollow")}</a>
 			</div>
 		</div>
 	}

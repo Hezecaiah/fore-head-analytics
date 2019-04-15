@@ -36,7 +36,8 @@ let make = (~data, _children) => {
   render: self => {
     <div className="align-content-center">
       <div className="row">
-        <div className="col-2 d-flex flex-column" style=(ReactDOMRe.Style.make(~background="#020202", ~paddingTop="30px",()))>
+        <div className="col-2 d-flex flex-column" style=(ReactDOMRe.Style.make(~background="#020202", ~paddingTop="30px", ~marginLeft="15px", ~border="5px solid #660000", ()))>
+          <h3 style=(ReactDOMRe.Style.make(~marginTop="-15px", ()))><u>{ReasonReact.string("Streamers")}</u></h3>
           {Array.length(data) > 0 ? 
             ReasonReact.array(Array.map(streamer => {
               (

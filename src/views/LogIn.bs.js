@@ -18,18 +18,47 @@ function make(_children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, React.createElement("h1", undefined, "Log in with your Twitch credentials."), React.createElement("form", undefined, React.createElement("label", {
-                                  htmlFor: "username"
-                                }, "Twitch Username: "), React.createElement("input", {
-                                  id: "username"
-                                }), React.createElement("br", undefined), React.createElement("label", {
-                                  htmlFor: "password"
-                                }, "Twitch Password: "), React.createElement("input", {
-                                  id: "password",
-                                  type: "password"
-                                }), React.createElement("br", undefined), React.createElement("button", {
-                                  type: "submit"
-                                }, "Log in")));
+              return React.createElement("div", {
+                          className: "d-flex justify-content-center"
+                        }, React.createElement("div", {
+                              className: "card d-flex flex-column justify-content-center",
+                              style: {
+                                background: "#660000",
+                                marginTop: "50px",
+                                padding: "15px"
+                              }
+                            }, React.createElement("h1", undefined, "Log in with your Twitch credentials."), React.createElement("form", undefined, React.createElement("div", {
+                                      className: "form-group"
+                                    }, React.createElement("label", {
+                                          htmlFor: "username"
+                                        }, "Twitch Username: "), React.createElement("input", {
+                                          className: "form-control",
+                                          id: "username",
+                                          placeholder: "Username"
+                                        })), React.createElement("div", {
+                                      className: "form-group"
+                                    }, React.createElement("label", {
+                                          htmlFor: "password"
+                                        }, "Twitch Password: "), React.createElement("input", {
+                                          className: "form-control",
+                                          id: "password",
+                                          placeholder: "Password",
+                                          type: "password"
+                                        })), React.createElement("a", {
+                                      className: "nav-link",
+                                      style: {
+                                        color: "white"
+                                      },
+                                      href: "dashboard"
+                                    }, React.createElement("button", {
+                                          className: "btn btn-primary align-self-center",
+                                          style: {
+                                            background: "#FF6100",
+                                            borderColor: "#FF7D2E",
+                                            borderRadius: "0"
+                                          },
+                                          type: "submit"
+                                        }, "Log in")))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

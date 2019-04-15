@@ -85,6 +85,7 @@ type state = {
 
 type action = 
 	| ChangeRoute(route)
+	| LogIn(string, string)
 	| SetData(userJSON)
 	| SetVerboseData(array(TypesModule.broadcasterVerbose))
 	| FailedToFetch(string);
@@ -153,7 +154,7 @@ let make = (_children) => {
 	},
 
   render: self => {
-		<div className="container-fluid">
+		<div className="container-fluid" style=(ReactDOMRe.Style.make(~margin="0", ~paddingRight="0", ~paddingLeft="0",()))>
 			<nav className="nav nav-tabs navbar navbar-expand-lg" style=(ReactDOMRe.Style.make(~background="#660000",()))>
 				<a className="navbar-brand" style=(ReactDOMRe.Style.make(~color="white", ~padding="5px", ~border="2px solid #FF6100", ())) href="#">{ReasonReact.string("4Head broe")}</a>
 				<nav className="nav-item" onClick={_event => self.send(ChangeRoute(LogIn))}><a style=(ReactDOMRe.Style.make(~color="white", ())) className="nav-link" href="#">{ReasonReact.string("Log In")}</a></nav>
@@ -163,7 +164,7 @@ let make = (_children) => {
 			/* <div id="twitch-embed"></div> */
 			(
 				switch (self.state.route, self.state.loggedIn) {
-				| (LogIn, _) => <LogIn />
+				| (LogIn, _) => <LogIn/>
 				| (Dashboard, true) => <Dashboard data={(self.state.followData)}/>
 				| (JudgementPage, true) => <JudgementPage />
 				| (_, false) => <LogIn />
