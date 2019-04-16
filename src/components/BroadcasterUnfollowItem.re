@@ -47,7 +47,7 @@ let make = (~onClick, ~broadcasterObject, _children) => {
 					</thead>
 					<tbody>
 						<tr>
-							<th scope="row">{ReasonReact.string("lol")}</th>
+							<th scope="row">{ReasonReact.string("23.53/100 points")}</th>
 							<td>{ReasonReact.string("4 hours, 32 minutes")}</td>
 						</tr>
 					</tbody>

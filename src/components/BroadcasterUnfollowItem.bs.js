@@ -52,7 +52,7 @@ function make(onClick, broadcasterObject, _children) {
                                               scope: "col"
                                             }, "Total time watching"))), React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("th", {
                                               scope: "row"
-                                            }, "lol"), React.createElement("td", undefined, "4 hours, 32 minutes"))), React.createElement("thead", undefined, React.createElement("tr", undefined, React.createElement("th", {
+                                            }, "23.53/100 points"), React.createElement("td", undefined, "4 hours, 32 minutes"))), React.createElement("thead", undefined, React.createElement("tr", undefined, React.createElement("th", {
                                               scope: "col"
                                             }, "Time in focus"), React.createElement("th", {
                                               scope: "col"
