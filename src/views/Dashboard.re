@@ -24,7 +24,7 @@ let make = (~data, _children) => {
         description: "Twitch is the world's leading video platform and community for gamers with more than 100 million visitors per month. Our mission is to connect gamers around the world by allowing them to broadcast, watch, and chat from everywhere they play.",
         profile_image_url: "https://static-cdn.jtvnw.net/jtv_user_pictures/twitch-profile_image-8a8c5be2e3b64a9a-300x300.png",
         offline_image_url: "",
-        view_count: 225659996,
+        view_count: 0,
       }
   },
 

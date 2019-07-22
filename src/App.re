@@ -132,6 +132,8 @@ let make = (_children) => {
 			|> catch(_err => Js.Promise.resolve(self.send(FailedToFetch("Twitch API"))))
 			|> ignore
 		);
+		/* This should just be a Promise |> Js.Promise.then_ to bridge the gap and solve sync issues, right?
+			I thought I tried that last time and it didn't work. We'll see. */
 		Js.Promise.(
 			Fetch.fetchWithInit({"https://api.twitch.tv/helix/users?" ++ "id=26560695&id=20650414&id=22580017&id=108994872&id=132230344&id=37356443&id=44084034&id=223307755&id=51496027&id26560695&id=44019612&id=102936080&id=75574155&id=54739364&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826"},
 			Fetch.RequestInit.make(
@@ -164,22 +166,7 @@ let make = (_children) => {
 			</nav>
 			(
 				switch (self.state.route, self.state.loggedIn) {
-				| (LogIn, _) => <div className="d-flex justify-content-center">
-													<div style=(ReactDOMRe.Style.make(~background="#660000", ~marginTop="50px",~padding="15px", ())) className="card d-flex flex-column justify-content-center">
-														<h1 className="text-center">{ReasonReact.string("Log In")}</h1>
-														<form>
-															<div className="form-group">
-																<label htmlFor="username">{ReasonReact.string("Twitch Username: ")}</label>
-																<input className="form-control" style=(ReactDOMRe.Style.make(~borderRadius="0", ())) placeholder="Username" id="username"></input>
-															</div>
-															<div className="form-group">
-																<label htmlFor="password">{ReasonReact.string("Twitch Password: ")}</label>
-																<input className="form-control" style=(ReactDOMRe.Style.make(~borderRadius="0", ())) type_="password" placeholder="Password" id="password"></input>
-															</div>
-															<a style=(ReactDOMRe.Style.make(~color="white", ())) onClick={_event => self.send(ChangeRoute(Dashboard))} className="nav-link" href="dashboard"><button className="btn btn-primary align-self-center" style=(ReactDOMRe.Style.make(~background="#FF6100", ~borderRadius="0", ~borderColor="#FF7D2E", ())) type_="submit">{ReasonReact.string("Log in")}</button></a>
-														</form>
-													</div>
-												</div>;
+				| (LogIn, _) => <LogIn logIn={_event => self.send(ChangeRoute(Dashboard))} />
 				| (Dashboard, true) => <Dashboard data={(self.state.followData)}/>
 				| (JudgementPage, true) => <JudgementPage data={(self.state.followData)}/>
 				| (_, false) => <LogIn />
@@ -188,5 +175,3 @@ let make = (_children) => {
 		</div>;
   }
 };
-
-"&id=40603161&id=36029255&id=38865133&id=32947748&id=105566327&id=8822&id=12826"

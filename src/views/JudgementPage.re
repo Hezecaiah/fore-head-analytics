@@ -1,16 +1,12 @@
 open TypesModule
 
-/* State declaration */
 type state = {
 	list: array(TypesModule.broadcasterVerbose)
 };
 
-/* Action declaration */
 type action =
 	| RemoveBroadcaster(int);
 
-	/* Component template declaration.
-  	Needs to be **after** state and action declarations! */
 let component = ReasonReact.reducerComponent("Judgement");
 
 let make = (~data, _children) => {
