@@ -104,7 +104,7 @@ let make = (_children) => {
 		followData: [||],
 		tempStr: ""
 	},
-	
+
 	reducer: (action, state) => {
 		switch (action) {
 			| ChangeRoute(route) => 

@@ -16,7 +16,7 @@ let make = (~broadcasterObject, ~engagement, ~coldOpen, _children) => {
 	...component,
 
 	initialState: () => {
-		data: "Lol 4Head",
+		data: "Just get the data 4Head",
 		advancedStatsShown: false
 	},
 
@@ -28,7 +28,7 @@ let make = (~broadcasterObject, ~engagement, ~coldOpen, _children) => {
 		},
 
 	/* didMount: self => {
-		Fetch analytics here when the backend is built
+		TODO: Fetch analytics here when the backend is built
 	}, */
 
 	render: self => {

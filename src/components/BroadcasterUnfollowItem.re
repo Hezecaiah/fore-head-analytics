@@ -16,7 +16,7 @@ let make = (~onClick, ~broadcasterObject, _children) => {
 	...component,
 
 	initialState: () => {
-		data: "Lol 4Head",
+		data: "Just get the data 4Head",
 		advancedStatsShown: false
 	},
 

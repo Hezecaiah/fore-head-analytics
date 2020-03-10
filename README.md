@@ -43,10 +43,6 @@ As a Twitch.tv user, I follow a lot of broadcasters that seem likeable, at least
 
 >Standard database software.
 
-# Server Routing
-
-Users, Relations (user to streamer), various subqueries, etc.# fore-head-analytics
-
 ## Run Project
 
 ```sh
