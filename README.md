@@ -1,4 +1,6 @@
-# __4Head Analytics__ 
+# __4Head Analytics__
+
+Development is currently frozen while the new Twitch API is maturing.
 
 ![4Head](https://i.imgur.com/ggFRSPJ.jpg)
 
@@ -6,7 +8,7 @@ As a Twitch.tv user, I follow a lot of broadcasters that seem likeable, at least
 
 # Planning
 
-[Here.](https://trello.com/b/pKCek74P/4head-analytics).
+[Here.](https://trello.com/b/pKCek74P/4head-analytics)
 ## User stories, wireframes, and ERDs are contained therein.
 
 # Technologies
